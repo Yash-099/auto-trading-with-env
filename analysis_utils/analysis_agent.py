@@ -11,15 +11,27 @@ class AnalysisAgent:
                     return False
             return True
 
-        liquidity_date = []
+        liquidities = []
         for i in range(len(data)):
             current_low = data[i]['low']
             if (i<num_neighbours or i>len(data)-num_neighbours-1):
                 continue
             else:
                 if check_neighbours_for_low(current_low, data, i, num_neighbours):
-                    liquidity_date.append({'datetime':data[i]['datetime'], 'price': data[i]['low']})
-        return liquidity_date
+                    liquidities.append({'datetime':data[i]['datetime'], 'price': data[i]['low']})
+
+        filtered_liquidities = []
+        for liquidity in liquidities:
+            liquidity_purged = False
+            for i in data:
+                if i['datetime'] > liquidity['datetime']:
+                    if i['low']< liquidity['price']:
+                        liquidity_purged = True
+                        break
+            if not (liquidity_purged):
+                filtered_liquidities.append(liquidity)
+
+        return filtered_liquidities
         ## TODO when two price points are very close (i.e. 4-5%) then take the lower one
         ## TODO fiter out the sellsides which are taken out in after time of when the liquidity was formed
 
@@ -34,7 +46,6 @@ class AnalysisAgent:
     def get_if_near_sellside(self, data, percentage, num_neighbours=1):
         sellsides = self.find_sellside_liquidity(data, num_neighbours)
         nearest_sellside = self.get_nearest_sellside(sellsides, data[-1]['close'])
-
         if nearest_sellside['percentage'] <= percentage:
             return {'nearest_liquidity_in_range': nearest_sellside['closest_liquidity_price']}
         else:

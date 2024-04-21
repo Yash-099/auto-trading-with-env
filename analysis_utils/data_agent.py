@@ -6,15 +6,18 @@ class DataAgent:
     def __init__(self) -> None:
         self.tv_agent = TvDatafeed()
 
-    def get_ohlc_data(self, symbol, interval, n_bars, exchange='NSE'):
-        stock_history_data = self.tv_agent.get_hist(symbol=symbol, exchange=exchange,interval=interval, n_bars=n_bars)
+    def get_ohlc_data(self, symbol, interval, n_bars, exchange='NSE', futures=False):
+        if futures:
+            stock_history_data = self.tv_agent.get_hist(symbol=symbol, exchange=exchange,interval=interval, n_bars=n_bars, fut_contract=1)
+        else:    
+            stock_history_data = self.tv_agent.get_hist(symbol=symbol, exchange=exchange,interval=interval, n_bars=n_bars)
         stock_history_data_json = []
         for i in range(n_bars):
             try:
                 k = stock_history_data.iloc[i,:].name
             except:
                 print(symbol)
-            k = k.to_pydatetime().strftime('%m/%d/%Y')
+            # k = k.to_pydatetime().strftime('%m/%d/%Y')
             stock_history_data_json.append({"symbol":stock_history_data.iloc[i,:].symbol, 
                                 "open":stock_history_data.iloc[i,:].open,
                                 "low":stock_history_data.iloc[i,:].low,
