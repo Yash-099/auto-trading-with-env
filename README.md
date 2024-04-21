@@ -4,18 +4,20 @@ Automating analysis(for now) and trading(far fetched goal)
 reference for getting data via tradingview
 https://www.youtube.com/watch?v=WhuB5cbr-kY
 
-Intervals
+# Intervals
 
-in_1_minute = "1"
-in_3_minute = "3"
-in_5_minute = "5"
-in_15_minute = "15"
-in_30_minute = "30"
-in_45_minute = "45"
-in_1_hour = "1H"
-in_2_hour = "2H"
-in_3_hour = "3H"
-in_4_hour = "4H"
-in_daily = "1D"
-in_weekly = "1W"
-in_monthly = "1M"
+```
+in_1_minute 
+in_3_minute 
+in_5_minute 
+in_15_minute 
+in_30_minute 
+in_45_minute 
+in_1_hour 
+in_2_hour 
+in_3_hour 
+in_4_hour 
+in_daily 
+in_weekly
+in_monthly 
+```
