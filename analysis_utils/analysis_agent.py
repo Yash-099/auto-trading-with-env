@@ -45,8 +45,12 @@ class AnalysisAgent:
     
     def get_if_near_sellside(self, data, percentage, num_neighbours=1):
         sellsides = self.find_sellside_liquidity(data, num_neighbours)
-        nearest_sellside = self.get_nearest_sellside(sellsides, data[-1]['close'])
-        if nearest_sellside['percentage'] <= percentage:
-            return {'nearest_liquidity_in_range': nearest_sellside['closest_liquidity_price']}
+        if sellsides!=[]:
+            nearest_sellside = self.get_nearest_sellside(sellsides, data[-1]['close'])
+            if nearest_sellside['percentage'] <= percentage:
+                return {'nearest_liquidity_in_range': nearest_sellside['closest_liquidity_price']}
+            else:
+                return {'nearest_liquidity_in_range': 0}
         else:
             return {'nearest_liquidity_in_range': 0}
+        
