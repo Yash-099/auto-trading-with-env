@@ -13,10 +13,7 @@ class DataAgent:
             stock_history_data = self.tv_agent.get_hist(symbol=symbol, exchange=exchange,interval=interval, n_bars=n_bars)
         stock_history_data_json = []
         for i in range(n_bars):
-            try:
-                k = stock_history_data.iloc[i,:].name
-            except:
-                print(symbol)
+            k = stock_history_data.iloc[i,:].name
             # k = k.to_pydatetime().strftime('%m/%d/%Y')
             stock_history_data_json.append({"symbol":stock_history_data.iloc[i,:].symbol, 
                                 "open":stock_history_data.iloc[i,:].open,
