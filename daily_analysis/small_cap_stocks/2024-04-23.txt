@@ -1,9 +1,7 @@
-Stock CEATLTD is near its liquidity pool at price 2428.2 current price is 2513.55
-Stock JKLAKSHMI is near its liquidity pool at price 772.15002 current price is 797.75
-Stock JUBLFOOD is near its liquidity pool at price 421.04999 current price is 438.5
-Stock PRSMJOHNSN is near its liquidity pool at price 161.60001 current price is 165.10001
-Stock CCL is near its liquidity pool at price 559.54999 current price is 565.84998
-Stock CENTURYPLY is near its liquidity pool at price 622.09998 current price is 639.20001
-Stock PRSMJOHNSN is near its liquidity pool at price 161.60001 current price is 164.2
-Stock CCL is near its liquidity pool at price 559.54999 current price is 569.05
-Stock CENTURYPLY is near its liquidity pool at price 622.09998 current price is 640.0
+Stock CEATLTD is near its liquidity pool at price 2428.2 current price is 2528.3
+Stock JKLAKSHMI is near its liquidity pool at price 772.15002 current price is 782.5
+Stock JUBLFOOD is near its liquidity pool at price 421.04999 current price is 442.14999
+Stock PRSMJOHNSN is near its liquidity pool at price 161.60001 current price is 164.8
+Stock CCL is near its liquidity pool at price 559.54999 current price is 585.29999
+Stock CYIENT is near its liquidity pool at price 1810.1 current price is 1903.95
+Stock CENTURYPLY is near its liquidity pool at price 622.09998 current price is 639.65002

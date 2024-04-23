@@ -6,25 +6,26 @@ import time
 from datetime import date
 import os
 from pathlib import Path
-
+from tqdm import tqdm
 
 if __name__=='__main__':
     data_agent = DataAgent()
     file = open(f'daily_analysis/small_cap_stocks/{date.today()}.txt', 'w')
     file.close()
+    today_date = date.today()
 
     # Path(f'daily_analyso/small_cap_stocks/{date.today()}.txt').touch()
-    for i in small_cap_stocks:
-        file = open(f'daily_analysis/small_cap_stocks/{date.today()}.txt', 'a')
-        retry_count = 3
+    for i in tqdm(range(len(small_cap_stocks))):
+        file = open(f'daily_analysis/small_cap_stocks/{today_date}.txt', 'a')
+        retry_count = 100
         got_data = False
         retry_num = 1
         while (not got_data) and (retry_num < retry_count):
             try:
-                data = data_agent.get_ohlc_data(i, Interval.in_weekly, 100)
+                data = data_agent.get_ohlc_data(small_cap_stocks[i], Interval.in_weekly, 100)
                 got_data = True
             except:
-                time.sleep(20)
+                time.sleep(0)
                 retry_num += 1
 
         analysis_agent = AnalysisAgent()
@@ -33,7 +34,7 @@ if __name__=='__main__':
         nearest_sellside_price = nearest_sellside['nearest_liquidity_in_range']
 
         if nearest_sellside_price!=0:
-            file.write(f'Stock {i} is near its liquidity pool at price {nearest_sellside_price} current price is {data[-1]["close"]}')
+            file.write(f'Stock {small_cap_stocks[i]} is near its liquidity pool at price {nearest_sellside_price} current price is {data[-1]["close"]}\n')
             file.close()
-            print(f'Stock {i} is near its liquidity pool at price {nearest_sellside_price} current price is {data[-1]["close"]}')
-        time.sleep(20)
+            # print(f'Stock {small_cap_stocks[i]} is near its liquidity pool at price {nearest_sellside_price} current price is {data[-1]["close"]}')
+        time.sleep(0)
