@@ -19,7 +19,7 @@ if __name__=='__main__':
                 data = data_agent.get_ohlc_data(nifty_50_stocks[i], Interval.in_weekly, 100)
                 got_data = True
             except:
-                time.sleep(2)
+                time.sleep(0)
                 retry_num += 1
 
         analysis_agent = AnalysisAgent()
@@ -31,4 +31,4 @@ if __name__=='__main__':
             file.write(f'Stock {nifty_50_stocks[i]} is near its liquidity pool at price {nearest_sellside_price} current price is {data[-1]["close"]}\n')
             file.close()
             # print(f'Stock {nifty_50_stocks[i]} is near its liquidity pool at price {nearest_sellside_price} current price is {data[-1]["close"]}')
-        time.sleep(2)
+        time.sleep(0)
