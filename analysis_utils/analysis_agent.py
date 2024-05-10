@@ -1,8 +1,8 @@
 class AnalysisAgent:
-    def find_fvg_bisi(data, remove_rebalanced=True):
+    def find_fvg_bisi(self, data, remove_rebalanced=True):
         bisi = []
         for i in range(len(data)):
-            if i == 0 or i == len(data)-1:
+            if i == 0 or i == len(data)-1 or i == len(data)-2:
                 continue
             else:
                 if data[i-1]['high'] < data[i+1]['low']:
@@ -17,18 +17,18 @@ class AnalysisAgent:
                     if candle['datetime'] > fvg['datetime']:
                         if candle['low'] < fvg['low']:
                             purged = True
-                    if not purged:
-                        unpurged_bisi.append(fvg)
+                if not purged:
+                    unpurged_bisi.append(fvg)
             return unpurged_bisi
 
-    def find_fvg_sibi(data):
+    def find_fvg_sibi(self, data, remove_rebalanced=True):
         sibi = []
         for i in range(len(data)):
-            if i == 0 or i == len(data)-1:
+            if i == 0 or i == len(data)-1 or i == len(data)-2:
                 continue
             else:
                 if data[i-1]['low'] > data[i+1]['high']:
-                    sibi.append({'low': data[i+1]['high'], 'high': data[i-1]['low']})
+                    sibi.append({'low': data[i+1]['high'], 'high': data[i-1]['low'], 'datetime':data[i]['datetime']})
         if not remove_rebalanced:
             return sibi
         else:
@@ -39,8 +39,9 @@ class AnalysisAgent:
                     if candle['datetime'] > fvg['datetime']:
                         if candle['high'] > fvg['high']:
                             purged = True
-                        if not purged:
-                            unpurged_sibi.append(fvg)
+                            break
+                if not purged:
+                    unpurged_sibi.append(fvg)
             return unpurged_sibi
 
     def find_sellside_liquidity(self, data, num_neighbours=1):
