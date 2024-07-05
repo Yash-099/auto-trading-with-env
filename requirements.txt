@@ -2,3 +2,6 @@ dhanhq
 websockets
 tvDatafeed
 tqdm
+streamlit
+pandas
+matplotlib

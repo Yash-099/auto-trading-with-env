@@ -25,22 +25,22 @@ if __name__ == '__main__':
 
     def alert(time, stock, action, fvg, last_tick, gap):
         message = f'{last_tick} action-{action}, reason - near {fvg}, GAP: {gap}'
-        log_message = f'{time}: {stock}'+message
+        log_message = f'{time}: {stock} '+message
         print(log_message)
         file = open(f'{(date.today())}.txt', 'a')
         file.write(log_message+'\n')
         file.close()
         show_notification(stock, message)
 
-    how_close = 0.25/100 # 0.25 percent
+    how_close = 0.5/100 # 0.25 percent
     
     fvgs = FVGS()
     stock_weekly_fvg_map = {}
     stock_monthly_fvg_map = {}
     print('getting fvgs data (one time activity)')
-    for i in tqdm(range(len(nifty_50_stocks))):
-        stock_weekly_fvg_map[nifty_50_stocks[i]] = fvgs.get_bisis(nifty_50_stocks[i], 'weekly') + fvgs.get_sibis(nifty_50_stocks[i], 'weekly')
-        stock_monthly_fvg_map[nifty_50_stocks[i]] = fvgs.get_bisis(nifty_50_stocks[i], 'monthly') + fvgs.get_sibis(nifty_50_stocks[i], 'monthly')
+    for i in tqdm(range(len(mid_cap_stocks))):
+        stock_weekly_fvg_map[mid_cap_stocks[i]] = fvgs.get_bisis(mid_cap_stocks[i], 'weekly') + fvgs.get_sibis(mid_cap_stocks[i], 'weekly')
+        stock_monthly_fvg_map[mid_cap_stocks[i]] = fvgs.get_bisis(mid_cap_stocks[i], 'monthly') + fvgs.get_sibis(mid_cap_stocks[i], 'monthly')
     print('got the fvgs data')
 
     preactions()
@@ -49,7 +49,7 @@ if __name__ == '__main__':
     placed_orders = []
     try:
         while True:
-            for i in nifty_50_stocks:
+            for i in mid_cap_stocks:
                 try:
                     last_tick = data_agent.get_ohlc_data(i, Interval.in_1_minute, 1)[0]['close']
 
