@@ -1,2 +1,5 @@
 dhan_env
 __pycache__
+log_dump
+*.txt
+!requirements.txt

@@ -6,7 +6,7 @@ class AnalysisAgent:
                 continue
             else:
                 if data[i-1]['high'] < data[i+1]['low']:
-                    bisi.append({'low': data[i-1]['high'], 'high': data[i+1]['low'], 'datetime': data[i]['datetime']})
+                    bisi.append({'low': data[i-1]['high'], 'high': data[i+1]['low'], 'datetime': data[i]['datetime'], 'type':'bisi'})
         if not remove_rebalanced:
             return bisi
         else:
@@ -28,7 +28,7 @@ class AnalysisAgent:
                 continue
             else:
                 if data[i-1]['low'] > data[i+1]['high']:
-                    sibi.append({'low': data[i+1]['high'], 'high': data[i-1]['low'], 'datetime':data[i]['datetime']})
+                    sibi.append({'low': data[i+1]['high'], 'high': data[i-1]['low'], 'datetime':data[i]['datetime'], 'type':'sibi'})
         if not remove_rebalanced:
             return sibi
         else:
