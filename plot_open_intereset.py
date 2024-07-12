@@ -2,15 +2,28 @@ import os
 import pandas as pd
 import streamlit as st
 import matplotlib.pyplot as plt
-
+from datetime import datetime
 # Function to read CSV files and extract relevant data
 def read_csv_files(folder_path):
-    data_frames = []
+    files_with_dates = []
+    
+    # Collect filenames and corresponding dates
     for filename in os.listdir(folder_path):
+        if filename.endswith(".csv") and filename.startswith("Spurts-in-OI-By-Underlying"):
+            date_str = filename.split('-')[-1].split('.')[0]  # Extract date from filename
+            date = datetime.strptime(date_str, '%d%m%Y')  # Convert date string to datetime object
+            files_with_dates.append((filename, date))
+
+    files_with_dates.sort(key=lambda x: x[1])
+    
+
+
+    data_frames = []
+    for filename, date in files_with_dates  :
         if filename.endswith(".csv") and filename.startswith("Spurts-in-OI-By-Underlying"):
             file_path = os.path.join(folder_path, filename)
             df = pd.read_csv(file_path)
-            df['Date'] = filename.split('-')[-1].split('.')[0]  # Extract date from filename
+            df['Date'] = date
             print(df.columns)
             data_frames.append(df)
     return pd.concat(data_frames, ignore_index=True)
