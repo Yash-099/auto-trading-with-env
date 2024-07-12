@@ -11,7 +11,6 @@ from tqdm import tqdm
 class FVGS:
     def get_sibis(self, stock, time_frame, candles=10):
         data_agent = DataAgent()
-        time_frame = Interval.in_monthly if time_frame=='monthly' else Interval.in_weekly
         try:
             data = data_agent.get_ohlc_data(stock, time_frame, candles)
         except:
@@ -24,12 +23,11 @@ class FVGS:
     
     def get_bisis(self, stock, time_frame, candles=10):
         data_agent = DataAgent()
-        time_frame = Interval.in_monthly if time_frame=='monthly' else Interval.in_weekly
         try:
             data = data_agent.get_ohlc_data(stock, time_frame, candles)
         except:
-            print(f'skipping {stock}')
-            return self.get_sibis(stock, time_frame, candles)
+            time.sleep(5)
+            return self.get_bisis(stock, time_frame, candles)
 
         analysis_agent = AnalysisAgent()
         
