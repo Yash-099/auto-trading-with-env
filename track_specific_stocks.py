@@ -3,11 +3,13 @@ from trade_utils import *
 from tvDatafeed import Interval
 from config import *
 import time
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 import os
 from pathlib import Path
 from tqdm import tqdm
 import pandas as pd
+import sys
+
 def preactions():
     make_log_file()
 
@@ -24,7 +26,7 @@ def show_notification(title, message):
 def alert(time, stock, last_tick, level):
     message = f'{last_tick} near level {level}'
     log_message = f'{time}: {stock}'+message
-    print(log_message)
+    print(log_message, flush=True)
     file = open(f'{(date.today())}.txt', 'a')
     file.write(log_message+'\n')
     file.close()
@@ -46,14 +48,32 @@ def has_breached_level(candle_low, candle_high, level):
     else:
         return False
 
+def market_closed():
+    # Get the current UTC time
+    now_utc = datetime.utcnow()
+    
+    # IST is UTC + 5 hours 30 minutes
+    ist_offset = timedelta(hours=5, minutes=30)
+    
+    # Convert current UTC time to IST
+    now_ist = now_utc + ist_offset
+    
+    # Define the 3:30 PM time in IST
+    three_thirty_pm_ist = now_ist.replace(hour=15, minute=30, second=0, microsecond=0)
+    
+    # Check if the current IST time is past 3:30 PM
+    return now_ist > three_thirty_pm_ist
+
+
 if __name__ == '__main__':
     how_close = 0.1/100 # 0.1 percent up and down
-    
+    print('started the tracking job', flush=True)
+    print('running pre actions', flush=True)
     preactions()
     data_agent = DataAgent()
 
     try:
-        while True:
+        while not market_closed():
             for i in list(temp_stock_to_track.keys()):
                 crucial_prices = temp_stock_to_track[i]
                 try:
@@ -68,7 +88,8 @@ if __name__ == '__main__':
                 except Exception as e:
                     time.sleep(3)
                     continue
-            print('\n')
+            print('Done a loop \n', flush=True)
+        exit(0)
     except KeyboardInterrupt:
-        print("Keyboard interrupt detected. Exiting...")
+        print("Keyboard interrupt detected. Exiting...", flush=True)
         exit(0)
