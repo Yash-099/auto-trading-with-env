@@ -1,5 +1,7 @@
 import time
 from datetime import datetime
+print("Script started...")
+
 
 def is_within_hours():
     now = datetime.now()
@@ -8,7 +10,9 @@ def is_within_hours():
 
     return start_time <= now <= end_time
 
+print("Script started...")
 while True:
+    print("Checking time...")
     if is_within_hours():
         # Place your code here
         print("Running script...")

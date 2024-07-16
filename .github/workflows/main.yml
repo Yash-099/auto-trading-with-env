@@ -1,11 +1,11 @@
-name: Run Python Script Daily
+name: Run Python Script on Push
 
 on:
-  push:
-    branches: 
-      - main
   schedule:
-    - cron: '45 3 * * *'  # 9:15 AM IST = 3:45 AM UTC
+    - cron: '45 3 * * *'
+  # push:
+  #   branches:
+  #     - main
 
 jobs:
   run-script:
@@ -18,12 +18,14 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.x'
+          python-version: '3.11'
 
       - name: Install dependencies
         run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt  # Adjust if necessary
+          python3 -m pip install --upgrade pip
+          pip install --upgrade --no-cache-dir git+https://github.com/Yash-099/tvdatafeed
+          pip install -r requirements.txt
+          
 
       - name: Run script
-        run: python run_in_live_market.py
+        run: python3 track_specific_stocks.py
