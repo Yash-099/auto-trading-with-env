@@ -1,6 +1,20 @@
 dhan_client_id = "1100912843"
 dhan_access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkaGFuIiwicGFydG5lcklkIjoiIiwiZXhwIjoxNzE0MjEzMzAxLCJ0b2tlbkNvbnN1bWVyVHlwZSI6IlNFTEYiLCJ3ZWJob29rVXJsIjoiIiwiZGhhbkNsaWVudElkIjoiMTEwMDkxMjg0MyJ9.NCBXmMX0d5Nx-f-dOyR0rL3K_tz5gQJsrLegaq-xCEt3D5b_Bq2G2YoWRmT6rOJzbjcjyeDVzlLi-fnujoQ7rA"
 exchange = 'NSE'
+temp_stock_to_track = { 
+                        "KOTAKBANK": [1815.85, 1809.95],
+                        "UPL": [542.65, 539.75], 
+                        "INDUSINDBK": [1340, 1470, 1485],
+                        "TATATECH": [1014], 
+                        "BIOCON": [364.95], 
+                        "M_M":[2575, 2506],
+                        "LT": [3801, 3630, 3621], 
+                        "INFY":[1680, 1674, 1664],
+                        "BHARTIARTL": [1405.95],
+                        "TECHM": [1475.45, 1462.35],
+                        "HCLTECH": [1472]
+                        }
+
 nifty_50_stocks = ["HDFCBANK",
 "RELIANCE",
 "INFY",
@@ -153,10 +167,6 @@ small_cap_stocks = ["AARTIIND",
 "ZENSARTECH"]
 
 
-temp = ["TCS",
-"NTPC",
-"GRASIM",
-"EICHERMOT"]
 
 mid_cap_stocks = ["ACC",
 "APOLLOTYRE",
