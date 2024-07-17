@@ -2,17 +2,18 @@ dhan_client_id = "1100912843"
 dhan_access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkaGFuIiwicGFydG5lcklkIjoiIiwiZXhwIjoxNzE0MjEzMzAxLCJ0b2tlbkNvbnN1bWVyVHlwZSI6IlNFTEYiLCJ3ZWJob29rVXJsIjoiIiwiZGhhbkNsaWVudElkIjoiMTEwMDkxMjg0MyJ9.NCBXmMX0d5Nx-f-dOyR0rL3K_tz5gQJsrLegaq-xCEt3D5b_Bq2G2YoWRmT6rOJzbjcjyeDVzlLi-fnujoQ7rA"
 exchange = 'NSE'
 temp_stock_to_track = { 
-                        "KOTAKBANK": [1815.85, 1809.95],
-                        "UPL": [542.65, 539.75], 
-                        "INDUSINDBK": [1340, 1470, 1485],
-                        "TATATECH": [1014], 
-                        "BIOCON": [364.95], 
-                        "M_M":[2575, 2506],
-                        "LT": [3801, 3630, 3621], 
-                        "INFY":[1680, 1674, 1664],
-                        "BHARTIARTL": [1405.95],
-                        "TECHM": [1475.45, 1462.35],
-                        "HCLTECH": [1472]
+                        "KOTAKBANK": {"weekly": [1773.55, 1830.85]}, 
+                        "UPL": {"weekly":[542.65, 539.75, 529.65]}, 
+                        "INDUSINDBK": {"weekly":[1340, 1460.5], 
+                                       "daily": [1485]},
+                        "BIOCON": {"weekly":[364.95]}, 
+                        "M_M":{"weekly":[2575, 2506]},
+                        "LT": {"daily":[3801, 3630]}, 
+                        "INFY":{"daily":[1680, 1674, 1664]},
+                        "BHARTIARTL": {"daily":1405.95},
+                        "TECHM": {"weekly":[1475.45, 1462.35]},
+                        "HCLTECH": {"weekly":[1472]},
+                        "RELIANCE": {"weekly":[2975]}
                         }
 
 nifty_50_stocks = ["HDFCBANK",

@@ -23,8 +23,8 @@ def make_log_file():
 def show_notification(title, message):
     os.system(f"osascript -e 'display notification \"{message}\" with title \"{title}\"'")
 
-def alert(time, stock, last_tick, level):
-    message = f'{last_tick} near level {level}'
+def alert(time, stock, last_tick, level, time_frame):
+    message = f'{last_tick} near {time_frame} level {level}'
     log_message = f'{time}: {stock}'+message
     print(log_message, flush=True)
     file = open(f'{(date.today())}.txt', 'a')
@@ -75,19 +75,21 @@ if __name__ == '__main__':
     try:
         while not market_closed():
             for i in list(temp_stock_to_track.keys()):
+                stock = i
                 crucial_prices = temp_stock_to_track[i]
-                try:
-                    data = data_agent.get_ohlc_data(i, Interval.in_5_minute, 1)
-                    five_min_high = data[0]['high']
-                    five_min_low = data[0]['low']
-                    last_tick = data[0]['close']
+                for time_frame in list(crucial_prices.keys()):
+                    try:
+                        data = data_agent.get_ohlc_data(stock, Interval.in_5_minute, 1)
+                        five_min_high = data[0]['high']
+                        five_min_low = data[0]['low']
+                        last_tick = data[0]['close']
 
-                    for crucial_price in crucial_prices:
-                        if has_breached_level(five_min_low,five_min_high, crucial_price):
-                            alert(datetime.now().strftime('%H:%M:%S'), i, last_tick, crucial_price)
-                except Exception as e:
-                    time.sleep(3)
-                    continue
+                        for crucial_price in crucial_prices[time_frame]:
+                            if has_breached_level(five_min_low,five_min_high, crucial_price):
+                                alert(datetime.now().strftime('%H:%M:%S'), i, last_tick, crucial_price, time_frame)
+                    except Exception as e:
+                        time.sleep(3)
+                        continue
             print('Done a loop \n', flush=True)
         exit(0)
     except KeyboardInterrupt:
