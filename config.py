@@ -7,13 +7,20 @@ temp_stock_to_track = {
                         "INDUSINDBK": {"weekly":[1340, 1460.5], 
                                        "daily": [1485]},
                         "BIOCON": {"weekly":[364.95]}, 
-                        "M_M":{"weekly":[2575, 2506]},
+                        "M_M":{"weekly":[2575, 2506, 2838]},
                         "LT": {"daily":[3801, 3630]}, 
                         "INFY":{"daily":[1680, 1674, 1664]},
                         "BHARTIARTL": {"daily":1405.95},
                         "TECHM": {"weekly":[1475.45, 1462.35]},
                         "HCLTECH": {"weekly":[1472]},
-                        "RELIANCE": {"weekly":[2975]}
+                        "RELIANCE": {"weekly":[2975],
+                                     "daily": [3114]},
+                        "SBIN": {"daily": [897,905]},
+                        "SUNPHARMA": {"weekly": [1544.4, 1538.95, 1529.85]},
+                        "JSWSTEEL": {"weekly": [912, 880], 
+                                     "daily": [900.75, 892.9, 878.4, 884]},
+                        "TITAN": {"weekly": [2802, 3361.05], 
+                                  "monthly":[2814.7, 2679.3]}
                         }
 
 nifty_50_stocks = ["HDFCBANK",

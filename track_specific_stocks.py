@@ -9,6 +9,11 @@ from pathlib import Path
 from tqdm import tqdm
 import pandas as pd
 import sys
+from argparse import ArgumentParser
+parser = ArgumentParser()
+
+parser.add_argument("--server", dest='server', action='store_true', help="if code running on UTC timezone server")
+args = parser.parse_args()
 
 def preactions():
     make_log_file()
@@ -21,7 +26,8 @@ def make_log_file():
         file = open(f'{date.today()}.txt', 'w')
 
 def show_notification(title, message):
-    os.system(f"osascript -e 'display notification \"{message}\" with title \"{title}\"'")
+    if not args.server:
+        os.system(f"osascript -e 'display notification \"{message}\" with title \"{title}\"'")
 
 def alert(time, stock, last_tick, level, time_frame):
     message = f'{last_tick} near {time_frame} level {level}'
@@ -38,7 +44,7 @@ def is_in_range(range: list, level):
     return False
 
 def has_breached_level(candle_low, candle_high, level):
-    price_range = [level*0.999, level*1.0001]
+    price_range = [level*0.999, level*1.001]
     if is_in_range(price_range, candle_high):
         return True
     elif is_in_range(price_range, candle_low):
@@ -86,11 +92,15 @@ if __name__ == '__main__':
 
                         for crucial_price in crucial_prices[time_frame]:
                             if has_breached_level(five_min_low,five_min_high, crucial_price):
-                                alert(datetime.now().strftime('%H:%M:%S'), i, last_tick, crucial_price, time_frame)
+                                if args.server:
+                                    time_now = datetime.now() + timedelta(hours=5, minutes=30)    
+                                else:
+                                    time_now = datetime.now()
+                                alert(time_now.strftime('%H:%M'), i, last_tick, crucial_price, time_frame)
                     except Exception as e:
-                        time.sleep(3)
+                        time.sleep(60)
                         continue
-            print('Done a loop \n', flush=True)
+            
         exit(0)
     except KeyboardInterrupt:
         print("Keyboard interrupt detected. Exiting...", flush=True)
