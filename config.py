@@ -5,7 +5,7 @@ temp_stock_to_track = {
                         "KOTAKBANK": {"weekly": [1773.55, 1830.85]}, 
                         "UPL": {"weekly":[542.65, 539.75, 529.65]}, 
                         "INDUSINDBK": {"weekly":[1340, 1460.5], 
-                                       "daily": [1485]},
+                                       "daily": [1485, 1454.85]},
                         "BIOCON": {"weekly":[364.95]}, 
                         "M_M":{"weekly":[2575, 2506, 2838]},
                         "LT": {"daily":[3801, 3630]}, 

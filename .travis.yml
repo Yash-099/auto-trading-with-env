@@ -1,0 +1,18 @@
+language: python
+python:
+  - "3.11"
+
+# Setting up a cron job
+jobs:
+  include:
+    - name: Run Python Script on Push
+      script: 
+        - python3 -m pip install --upgrade pip
+        - pip install --upgrade --no-cache-dir git+https://github.com/Yash-099/tvdatafeed
+        - pip install -r requirements.txt
+        - python3 track_specific_stocks.py --server
+
+# Schedule the build
+branches:
+  only:
+    - main
