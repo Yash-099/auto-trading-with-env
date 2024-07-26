@@ -73,7 +73,7 @@ def market_closed():
 
 if __name__ == '__main__':
     how_close = 0.1/100 # 0.1 percent up and down
-    print('started the tracking job...', flush=True)
+    print('started the tracking job....', flush=True)
     print('running pre actions', flush=True)
     preactions()
     data_agent = DataAgent()
