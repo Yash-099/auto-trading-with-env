@@ -14,7 +14,7 @@ temp_stock_to_track = {
                         "HCLTECH": {"weekly":[1472],
                                     "daily":[1602, 1598]},
                         "RELIANCE": {"weekly":[3074, 3110],
-                                     "daily": []},
+                                     "daily": [3011.5]},
                         "SBIN": {"daily": [897,905]},
                         "SUNPHARMA": {"weekly": []},
                         "JSWSTEEL": {"weekly": [909, 915], 
@@ -22,7 +22,16 @@ temp_stock_to_track = {
                         "TITAN": {"weekly": [2802, 3361.05, 3382], 
                                   "monthly":[2814.7, 2679.3]},
                         "HEROMOTOCO": {"weekly": [5280, 5119]},
-                        "HINDALCO": {"daily":[656,683, 690]}
+                        "HINDALCO": {"daily":[656,683, 690]},
+                        "HEROMOTOCO": {"weekly": [5280, 5225, 5119]},
+                        "ITC": {"daily": [479.45],
+                                "weekly": [465.85, 463.25]},
+                        "NESTLEIND": {"daily": [2438, 2425.6]},
+                        "BRITANNIA": {"weekly": [5787.05]},
+                        "CIPLA":{"daily": [1501.6]},
+                        "ADANIPORTS":{"weekly": [1510.60]},
+                        "SBILIFE": {"daily": [1645, 1632.95]},
+                        "HDFCLIFE": {"daily": [682.05, 675]}
                         }
 
 nifty_50_stocks = ["HDFCBANK",
