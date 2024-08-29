@@ -31,7 +31,7 @@ def show_notification(title, message):
 
 def alert(time, stock, last_tick, level, time_frame):
     message = f'{last_tick} near {time_frame} level {level}'
-    log_message = f'{time}: {stock}'+message
+    log_message = f'{time}: {stock} '+ message
     print(log_message, flush=True)
     file = open(f'{(date.today())}.txt', 'a')
     file.write(log_message+'\n')
@@ -77,12 +77,13 @@ if __name__ == '__main__':
     print('running pre actions', flush=True)
     preactions()
     data_agent = DataAgent()
+    crucial_levels = json.load(open('updated_crucial_levels.json', 'r'))
 
     try:
         while not market_closed():
-            for i in list(temp_stock_to_track.keys()):
+            for i in list(crucial_levels.keys()):
                 stock = i
-                crucial_prices = temp_stock_to_track[i]
+                crucial_prices = crucial_levels[i]
                 for time_frame in list(crucial_prices.keys()):
                     try:
                         data = data_agent.get_ohlc_data(stock, Interval.in_5_minute, 1)
@@ -91,16 +92,16 @@ if __name__ == '__main__':
                         last_tick = data[0]['close']
 
                         for crucial_price in crucial_prices[time_frame]:
-                            if has_breached_level(five_min_low,five_min_high, crucial_price):
+                            if has_breached_level(five_min_low, five_min_high, crucial_price[0]):
                                 if args.server:
-                                    time_now = datetime.now() + timedelta(hours=5, minutes=30)    
+                                    time_now = datetime.now() + timedelta(hours=5, minutes=30)
                                 else:
                                     time_now = datetime.now()
-                                alert(time_now.strftime('%H:%M'), i, last_tick, crucial_price, time_frame)
+                                alert(time_now.strftime('%H:%M'), i, last_tick, crucial_price[0], crucial_price[1])
                     except Exception as e:
                         time.sleep(60)
                         continue
-            
+
         exit(0)
     except KeyboardInterrupt:
         print("Keyboard interrupt detected. Exiting...", flush=True)
