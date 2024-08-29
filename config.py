@@ -1,41 +1,13 @@
+def remove_stocks_from_list(list, stocks_to_remove):
+    final_list = []
+    for stock in list:
+        if stock not in stocks_to_remove:
+            final_list.append(stock)
+    return final_list
+
 dhan_client_id = "1100912843"
 dhan_access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkaGFuIiwicGFydG5lcklkIjoiIiwiZXhwIjoxNzE0MjEzMzAxLCJ0b2tlbkNvbnN1bWVyVHlwZSI6IlNFTEYiLCJ3ZWJob29rVXJsIjoiIiwiZGhhbkNsaWVudElkIjoiMTEwMDkxMjg0MyJ9.NCBXmMX0d5Nx-f-dOyR0rL3K_tz5gQJsrLegaq-xCEt3D5b_Bq2G2YoWRmT6rOJzbjcjyeDVzlLi-fnujoQ7rA"
 exchange = 'NSE'
-temp_stock_to_track = { 
-                        "KOTAKBANK": {"daily": [1780.9, 1768]}, 
-                        "UPL": {"weekly":[518.4, 508.8]}, 
-                        "INDUSINDBK": {"weekly":[1353, 1336.95], 
-                                       "daily": [1396.55]},
-                        "M_M":{"weekly":[2575, 2506],
-                               "daily": [2821, 2811, 2875, 2639]},
-                        "LT": {"daily":[3852, 3897.15, 3680]}, 
-                        "INFY":{"daily":[1726],
-                                "weekly": [1800, 1792]},
-                        "BHARTIARTL": {"daily":[]},
-                        "TECHM": {"weekly":[]},
-                        "HCLTECH": {"weekly":[1472],
-                                    "daily":[1602, 1598]},
-                        "RELIANCE": {"weekly":[3074, 3110],
-                                     "daily": [3002]},
-                        "SBIN": {"daily": [897,905]},
-                        "SUNPHARMA": {"weekly": []},
-                        "JSWSTEEL": {"weekly": [909], 
-                                     "daily": [902.1]},
-                        "TITAN": {"weekly": [2802, 3361.05, 3382], 
-                                  "monthly":[2814.7, 2679.3]},
-                        "HINDALCO": {"daily":[667,665]},
-                        "HEROMOTOCO": {"weekly": [5280, 5225, 5119]},
-                        "ITC": {"daily": [479.45],
-                                "weekly": [465.85, 463.25]},
-                        "NESTLEIND": {"daily": [2438, 2425.6]},
-                        "BRITANNIA": {"weekly": [],
-                                      "daily": [5668.85, 5568]},
-                        "CIPLA":{"daily": [1501.6]},
-                        "ADANIPORTS":{"weekly": [1510.60]},
-                        "SBILIFE": {"daily": [1645, 1632.95]},
-                        "HDFCLIFE": {"daily": [682.05, 675]},
-                        "TCS": {"daily": [4322.5]}
-                        }
 
 nifty_50_stocks = ["HDFCBANK",
 "RELIANCE",
@@ -88,6 +60,7 @@ nifty_50_stocks = ["HDFCBANK",
 "HEROMOTOCO",
 "APOLLOHOSP"]
 
+stocks_to_track = remove_stocks_from_list(nifty_50_stocks, ['MARUTI'])
 old_nifty50 = [
     "DMART",
     "UPL",

@@ -88,7 +88,7 @@ if __name__ == '__main__':
         index_error = False
         while retry_count < num_retry:
             try:
-                data = data_agent.get_ohlc_data(stock, Interval.in_monthly, 12*number_of_years_to_track + 2)
+                data = data_agent.get_ohlc_data(stock, Interval.in_monthly, 12*number_of_years_to_track + 1)
                 stocks_tracked.append(stock)
                 break
             except Exception as error:
@@ -108,12 +108,12 @@ if __name__ == '__main__':
         num_positive = 0
         for i in range(number_of_years_to_track):
             temp = i * 12
-            change = (data[temp+1]['close'] - data[temp]['close'])/data[temp]['close'] * 100   
+            change = (data[temp+1]['close'] - data[temp]['close'])/data[temp]['close'] * 100
             percentage_change.append(change)
             if change > 0:
                 num_positive += 1
         percentage_positive = num_positive/number_of_years_to_track
-    
+        # print(percentage_change)
         percentage_positive_map[stock] = percentage_positive
 
     stocks_tracked.sort(key=lambda x:percentage_positive_map[x])
