@@ -3,3 +3,4 @@ log_dump
 *.txt
 !requirements.txt
 *.json
+!updated_crucial_levels.json
