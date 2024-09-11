@@ -92,7 +92,7 @@ if __name__ == '__main__':
                 stocks_tracked.append(stock)
                 break
             except Exception as error:
-                if  isinstance(error, IndexError):
+                if isinstance(error, IndexError):
                     print(f'skipping {stock}', error)
                     index_error = True
                     break
