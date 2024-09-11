@@ -30,7 +30,7 @@ def show_notification(title, message):
         os.system(f"osascript -e 'display notification \"{message}\" with title \"{title}\"'")
 
 def alert(time, stock, last_tick, level, time_frame):
-    message = f'{last_tick} near {time_frame} level {level}'
+    message = f'near {time_frame} level {level}'
     log_message = f'{time}: {stock} '+ message
     print(log_message, flush=True)
     file = open(f'{(date.today())}.txt', 'a')

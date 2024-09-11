@@ -1,15 +1,15 @@
 from tvDatafeed import TvDatafeed
 import pandas
 import json
+import time
 
 class DataAgent:
     def __init__(self) -> None:
         self.tv_agent = TvDatafeed()
-
-    def get_ohlc_data(self, symbol, interval, n_bars, exchange='NSE', futures=False):
+    def get_ohlc_data_internal(self, symbol, interval, n_bars, exchange='NSE', futures=False):
         if futures:
-            stock_history_data = self.tv_agent.get_hist(symbol=symbol, exchange=exchange,interval=interval, n_bars=n_bars, fut_contract=1)
-        else:    
+                stock_history_data = self.tv_agent.get_hist(symbol=symbol, exchange=exchange,interval=interval, n_bars=n_bars, fut_contract=1)
+        else:
             stock_history_data = self.tv_agent.get_hist(symbol=symbol, exchange=exchange,interval=interval, n_bars=n_bars)
         stock_history_data_json = []
         for i in range(n_bars):
@@ -22,6 +22,13 @@ class DataAgent:
                                 "high":stock_history_data.iloc[i,:].high,
                                 "datetime":k})
         return stock_history_data_json
+
+    def get_ohlc_data(self, symbol, interval, n_bars, exchange='NSE', futures=False):
+        try:
+            return self.get_ohlc_data_internal(symbol, interval, n_bars, exchange, futures)
+        except:
+            time.sleep(3)
+            return self.get_ohlc_data_internal(symbol, interval, n_bars, exchange, futures)
 
     def get_avg_graph(self,data_json):
         avg = []
