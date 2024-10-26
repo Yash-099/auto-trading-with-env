@@ -4,3 +4,4 @@ log_dump
 !requirements.txt
 *.json
 !updated_crucial_levels.json
+dhan_env/*

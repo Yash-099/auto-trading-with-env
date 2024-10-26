@@ -2,28 +2,24 @@
     "HDFCBANK": {
         "daily": [
             [
-                1571,
-                "daily BISI LOW"
-            ],
-            [
-                1574,
-                "daily BISI HIGH"
-            ],
-            [
-                1572.5,
-                "daily BISI MID"
-            ],
-            [
-                1585.7,
-                "daily BISI LOW"
-            ],
-            [
                 1587.575,
                 "daily BISI MID"
             ],
             [
                 1613.7,
                 "daily BISI LOW"
+            ],
+            [
+                1652.5,
+                "daily BISI LOW"
+            ],
+            [
+                1657.05,
+                "daily BISI HIGH"
+            ],
+            [
+                1654.775,
+                "daily BISI MID"
             ],
             [
                 1685,
@@ -61,53 +57,50 @@
             [
                 2974.1001,
                 "daily SIBI HIGH"
-            ],
-            [
-                2956.9751,
-                "daily SIBI MID"
             ]
         ],
-        "weekly": []
+        "weekly": [
+            [
+                3080.30005,
+                "weekly SIBI MID"
+            ],
+            [
+                2972,
+                "weekly SIBI LOW"
+            ],
+            [
+                2986,
+                "weekly SIBI HIGH"
+            ],
+            [
+                2979,
+                "weekly SIBI MID"
+            ]
+        ]
     },
     "INFY": {
         "daily": [
             [
-                1829.5,
-                "daily BISI HIGH"
-            ],
-            [
-                1819.75,
-                "daily BISI MID"
-            ],
-            [
-                1825,
-                "daily BISI LOW"
-            ],
-            [
                 1849.2,
                 "daily BISI HIGH"
-            ],
-            [
-                1837.1,
-                "daily BISI MID"
             ],
             [
                 1888.75,
                 "daily BISI LOW"
             ],
             [
-                1942.8,
-                "daily SIBI HIGH"
+                1926,
+                "daily BISI LOW"
+            ],
+            [
+                1930.825,
+                "daily BISI MID"
             ]
         ],
         "weekly": [
             [
                 1849.2,
                 "weekly BISI HIGH"
-            ],
-            [
-                1823.5500000000002,
-                "weekly BISI MID"
             ],
             [
                 1861.85,
@@ -126,36 +119,19 @@
     "ICICIBANK": {
         "daily": [
             [
-                1178.65,
+                1239.3,
                 "daily BISI LOW"
             ],
             [
-                1188.55,
+                1242.05,
                 "daily BISI HIGH"
             ],
             [
-                1183.6,
-                "daily BISI MID"
-            ],
-            [
-                1192.6,
-                "daily BISI LOW"
-            ],
-            [
-                1196.8249999999998,
+                1240.675,
                 "daily BISI MID"
             ]
         ],
-        "weekly": [
-            [
-                1193,
-                "weekly BISI LOW"
-            ],
-            [
-                1197.025,
-                "weekly BISI MID"
-            ]
-        ]
+        "weekly": []
     },
     "TCS": {
         "daily": [
@@ -198,19 +174,23 @@
     "KOTAKBANK": {
         "daily": [
             [
-                1724.65,
+                1805.45,
                 "daily BISI LOW"
             ],
             [
-                1805.9,
-                "daily SIBI LOW"
+                1816.75,
+                "daily BISI HIGH"
             ],
             [
-                1809.7,
+                1811.1,
+                "daily BISI MID"
+            ],
+            [
+                1893.1,
                 "daily SIBI HIGH"
             ],
             [
-                1807.8000000000002,
+                1881.55,
                 "daily SIBI MID"
             ]
         ],
@@ -223,60 +203,75 @@
     "BHARTIARTL": {
         "daily": [
             [
-                1499.9,
-                "daily BISI LOW"
-            ],
-            [
-                1520.7,
-                "daily BISI LOW"
-            ],
-            [
-                1521.65,
+                1574.45,
                 "daily BISI HIGH"
             ],
             [
-                1521.1750000000002,
+                1560.6,
+                "daily BISI MID"
+            ],
+            [
+                1586,
+                "daily BISI LOW"
+            ],
+            [
+                1590.1,
+                "daily BISI HIGH"
+            ],
+            [
+                1588.05,
+                "daily BISI MID"
+            ],
+            [
+                1598.9,
+                "daily BISI LOW"
+            ],
+            [
+                1614.975,
                 "daily BISI MID"
             ]
         ],
-        "weekly": [
-            [
-                1502,
-                "weekly BISI HIGH"
-            ],
-            [
-                1510,
-                "weekly BISI LOW"
-            ],
-            [
-                1520.1,
-                "weekly BISI MID"
-            ]
-        ]
+        "weekly": []
     },
     "AXISBANK": {
         "daily": [
             [
-                1200,
+                1175.6,
+                "daily BISI LOW"
+            ],
+            [
+                1194.85,
+                "daily BISI LOW"
+            ],
+            [
+                1201,
+                "daily BISI HIGH"
+            ],
+            [
+                1197.925,
+                "daily BISI MID"
+            ],
+            [
+                1267.35,
                 "daily SIBI LOW"
             ],
             [
-                1225.5,
-                "daily SIBI MID"
-            ],
-            [
-                1226.65,
+                1278.2,
                 "daily SIBI HIGH"
             ],
             [
-                1204.9,
+                1272.775,
                 "daily SIBI MID"
+            ],
+            [
+                1251,
+                "daily SIBI HIGH"
             ]
         ],
         "weekly": [
             [
-                1194.6,
-                "weekly SIBI LOW"
+                1288.2,
+                "weekly SIBI HIGH"
             ],
             [
                 1241.4,
@@ -286,18 +281,6 @@
     },
     "LT": {
         "daily": [
-            [
-                3441.5,
-                "daily BISI LOW"
-            ],
-            [
-                3446,
-                "daily BISI HIGH"
-            ],
-            [
-                3443.75,
-                "daily BISI MID"
-            ],
             [
                 3748.8999,
                 "daily SIBI LOW"
@@ -313,14 +296,6 @@
             [
                 3765.8501,
                 "daily SIBI HIGH"
-            ],
-            [
-                3631.1001,
-                "daily SIBI HIGH"
-            ],
-            [
-                3627.4500500000004,
-                "daily SIBI MID"
             ]
         ],
         "weekly": []
@@ -328,36 +303,19 @@
     "WIPRO": {
         "daily": [
             [
-                505.27501,
+                526.25,
+                "daily BISI LOW"
+            ],
+            [
+                530.85,
+                "daily BISI HIGH"
+            ],
+            [
+                528.55,
                 "daily BISI MID"
-            ],
-            [
-                531.84998,
-                "daily SIBI HIGH"
-            ],
-            [
-                530.04999,
-                "daily SIBI MID"
             ]
         ],
-        "weekly": [
-            [
-                500.10001,
-                "weekly BISI LOW"
-            ],
-            [
-                511.35001,
-                "weekly BISI HIGH"
-            ],
-            [
-                505.72501,
-                "weekly BISI MID"
-            ],
-            [
-                542.625,
-                "weekly SIBI MID"
-            ]
-        ]
+        "weekly": []
     },
     "SBIN": {
         "daily": [
@@ -366,11 +324,11 @@
                 "daily SIBI LOW"
             ],
             [
-                813.65002,
+                813.65,
                 "daily SIBI HIGH"
             ],
             [
-                813.27502,
+                813.2750100000001,
                 "daily SIBI MID"
             ],
             [
@@ -382,21 +340,34 @@
                 "daily SIBI MID"
             ]
         ],
-        "weekly": []
+        "weekly": [
+            [
+                795,
+                "weekly SIBI LOW"
+            ],
+            [
+                806.5,
+                "weekly SIBI HIGH"
+            ],
+            [
+                800.75,
+                "weekly SIBI MID"
+            ]
+        ]
     },
     "NTPC": {
         "daily": [
             [
-                381.70001,
+                399.29999,
+                "daily BISI LOW"
+            ],
+            [
+                399.35,
                 "daily BISI HIGH"
             ],
             [
-                379.475005,
+                399.324995,
                 "daily BISI MID"
-            ],
-            [
-                401.85001,
-                "daily SIBI HIGH"
             ]
         ],
         "weekly": []
@@ -404,69 +375,49 @@
     "ONGC": {
         "daily": [
             [
-                287.35001,
-                "daily BISI HIGH"
+                278.89999,
+                "daily BISI LOW"
             ],
             [
                 283.125,
                 "daily BISI MID"
             ],
             [
-                308.70001,
+                301.5,
                 "daily SIBI LOW"
             ],
             [
-                310.14999,
+                303.70001,
                 "daily SIBI HIGH"
             ],
             [
-                309.425,
+                302.600005,
                 "daily SIBI MID"
             ]
         ],
         "weekly": [
             [
-                287.35001,
-                "weekly BISI HIGH"
-            ],
-            [
                 281.40001,
                 "weekly BISI MID"
-            ],
-            [
-                289.29999,
-                "weekly BISI LOW"
             ]
         ]
     },
     "TECHM": {
         "daily": [
             [
-                1531.3,
+                1627,
+                "daily BISI LOW"
+            ],
+            [
+                1638,
                 "daily BISI HIGH"
             ],
             [
-                1552.65,
+                1632.5,
                 "daily BISI MID"
-            ],
-            [
-                1631.3,
-                "daily SIBI LOW"
-            ],
-            [
-                1632.9,
-                "daily SIBI HIGH"
-            ],
-            [
-                1632.1,
-                "daily SIBI MID"
             ]
         ],
         "weekly": [
-            [
-                1545.55,
-                "weekly BISI MID"
-            ],
             [
                 1687.5,
                 "weekly SIBI HIGH"
@@ -482,33 +433,49 @@
             [
                 1739.975,
                 "daily BISI MID"
+            ],
+            [
+                1766.3,
+                "daily BISI LOW"
+            ],
+            [
+                1773.7,
+                "daily BISI HIGH"
+            ],
+            [
+                1770,
+                "daily BISI MID"
+            ],
+            [
+                1737.75,
+                "daily BISI LOW"
+            ],
+            [
+                1739.975,
+                "daily BISI MID"
+            ],
+            [
+                1766.3,
+                "daily BISI LOW"
+            ],
+            [
+                1773.7,
+                "daily BISI HIGH"
+            ],
+            [
+                1770,
+                "daily BISI MID"
             ]
         ],
         "weekly": [
             [
-                1695.05,
-                "weekly BISI LOW"
-            ],
-            [
                 1740.05,
                 "weekly BISI HIGH"
-            ],
-            [
-                1717.55,
-                "weekly BISI MID"
             ]
         ]
     },
     "BAJAJFINSV": {
         "daily": [
-            [
-                1750.05,
-                "daily BISI HIGH"
-            ],
-            [
-                1742.525,
-                "daily BISI MID"
-            ],
             [
                 1772,
                 "daily BISI LOW"
@@ -538,6 +505,34 @@
             [
                 1787.8,
                 "weekly BISI HIGH"
+            ],
+            [
+                1793.5,
+                "weekly BISI LOW"
+            ],
+            [
+                1814.25,
+                "weekly BISI HIGH"
+            ],
+            [
+                1803.875,
+                "weekly BISI MID"
+            ],
+            [
+                1787.8,
+                "weekly BISI HIGH"
+            ],
+            [
+                1793.5,
+                "weekly BISI LOW"
+            ],
+            [
+                1814.25,
+                "weekly BISI HIGH"
+            ],
+            [
+                1803.875,
+                "weekly BISI MID"
             ]
         ]
     },
@@ -568,30 +563,38 @@
                 "daily BISI MID"
             ],
             [
-                3348,
-                "daily SIBI HIGH"
+                3314,
+                "daily BISI LOW"
             ],
             [
-                3331.5,
-                "daily SIBI MID"
+                3315,
+                "daily BISI HIGH"
+            ],
+            [
+                3314.5,
+                "daily BISI MID"
+            ],
+            [
+                3310,
+                "daily BISI LOW"
             ]
         ],
         "weekly": [
             [
+                3203.6499,
+                "weekly BISI LOW"
+            ],
+            [
+                3258,
+                "weekly BISI HIGH"
+            ],
+            [
+                3230.82495,
+                "weekly BISI MID"
+            ],
+            [
                 3425,
                 "weekly SIBI HIGH"
-            ],
-            [
-                3320,
-                "weekly SIBI LOW"
-            ],
-            [
-                3345,
-                "weekly SIBI HIGH"
-            ],
-            [
-                3332.5,
-                "weekly SIBI MID"
             ]
         ]
     },
@@ -612,18 +615,6 @@
         ],
         "weekly": [
             [
-                1753,
-                "weekly BISI LOW"
-            ],
-            [
-                1764.5,
-                "weekly BISI HIGH"
-            ],
-            [
-                1758.75,
-                "weekly BISI MID"
-            ],
-            [
                 1781.45,
                 "weekly BISI LOW"
             ],
@@ -638,7 +629,20 @@
         ]
     },
     "JSWSTEEL": {
-        "daily": [],
+        "daily": [
+            [
+                944.29999,
+                "daily BISI LOW"
+            ],
+            [
+                951.35,
+                "daily BISI HIGH"
+            ],
+            [
+                947.824995,
+                "daily BISI MID"
+            ]
+        ],
         "weekly": []
     },
     "TITAN": {
@@ -657,16 +661,20 @@
     "INDUSINDBK": {
         "daily": [
             [
-                1387.15,
-                "daily BISI LOW"
-            ],
-            [
                 1396.2,
                 "daily BISI MID"
             ],
             [
-                1469,
-                "daily SIBI LOW"
+                1438.95,
+                "daily BISI LOW"
+            ],
+            [
+                1442.35,
+                "daily BISI HIGH"
+            ],
+            [
+                1440.65,
+                "daily BISI MID"
             ],
             [
                 1485,
@@ -679,28 +687,12 @@
         ],
         "weekly": [
             [
-                1371.65,
-                "weekly BISI LOW"
-            ],
-            [
-                1377.55,
-                "weekly BISI HIGH"
-            ],
-            [
-                1374.6,
-                "weekly BISI MID"
-            ],
-            [
                 1395.95,
                 "weekly BISI LOW"
             ],
             [
                 1398.725,
                 "weekly BISI MID"
-            ],
-            [
-                1469,
-                "weekly SIBI LOW"
             ],
             [
                 1499.1,
@@ -718,10 +710,6 @@
     },
     "BAJFINANCE": {
         "daily": [
-            [
-                6917,
-                "daily BISI LOW"
-            ],
             [
                 7071.0498,
                 "daily BISI HIGH"
@@ -743,29 +731,33 @@
             [
                 6983.44995,
                 "weekly BISI MID"
-            ],
-            [
-                7486,
-                "weekly SIBI MID"
             ]
         ]
     },
     "TATAMOTORS": {
         "daily": [
             [
-                1086.175,
-                "daily SIBI MID"
+                946,
+                "daily BISI LOW"
             ],
             [
-                1049.95,
+                1011.55,
                 "daily SIBI LOW"
             ],
             [
-                1066.95,
+                1026.25,
                 "daily SIBI HIGH"
             ],
             [
-                1058.45,
+                1018.9,
+                "daily SIBI MID"
+            ],
+            [
+                1032.2,
+                "daily SIBI HIGH"
+            ],
+            [
+                1010.1,
                 "daily SIBI MID"
             ]
         ],
@@ -787,18 +779,6 @@
                 "daily BISI LOW"
             ],
             [
-                1517.45,
-                "daily SIBI LOW"
-            ],
-            [
-                1519,
-                "daily SIBI HIGH"
-            ],
-            [
-                1518.225,
-                "daily SIBI MID"
-            ],
-            [
                 1478.8,
                 "daily SIBI HIGH"
             ],
@@ -812,24 +792,23 @@
     "M_M": {
         "daily": [
             [
-                2760,
-                "daily SIBI LOW"
+                2708,
+                "daily BISI LOW"
             ],
             [
-                2772.6001,
+                2711.75,
+                "daily BISI HIGH"
+            ],
+            [
+                2709.875,
+                "daily BISI MID"
+            ],
+            [
+                2872.95,
                 "daily SIBI HIGH"
-            ],
-            [
-                2766.30005,
-                "daily SIBI MID"
             ]
         ],
-        "weekly": [
-            [
-                2589.75,
-                "weekly BISI LOW"
-            ]
-        ]
+        "weekly": []
     },
     "ULTRACEMCO": {
         "daily": [
@@ -847,6 +826,18 @@
     "POWERGRID": {
         "daily": [
             [
+                329.20001,
+                "daily BISI LOW"
+            ],
+            [
+                332,
+                "daily BISI HIGH"
+            ],
+            [
+                330.600005,
+                "daily BISI MID"
+            ],
+            [
                 344.29999,
                 "daily SIBI HIGH"
             ],
@@ -859,6 +850,14 @@
     },
     "COALINDIA": {
         "daily": [
+            [
+                516.84998,
+                "daily SIBI LOW"
+            ],
+            [
+                517.25,
+                "daily SIBI MID"
+            ],
             [
                 507.5,
                 "daily SIBI LOW"
@@ -878,32 +877,49 @@
             [
                 499.774995,
                 "daily SIBI MID"
+            ]
+        ],
+        "weekly": [
+            [
+                497.85,
+                "weekly SIBI LOW"
             ],
             [
-                495.14999,
-                "daily SIBI HIGH"
+                516.09998,
+                "weekly SIBI HIGH"
+            ],
+            [
+                506.97499,
+                "weekly SIBI MID"
+            ]
+        ]
+    },
+    "BAJAJ_AUTO": {
+        "daily": [
+            [
+                11443.35,
+                "daily BISI HIGH"
+            ],
+            [
+                11239.525000000001,
+                "daily BISI MID"
+            ],
+            [
+                11501.3,
+                "daily BISI LOW"
+            ],
+            [
+                11594.849999999999,
+                "daily BISI MID"
             ]
         ],
         "weekly": []
-    },
-    "BAJAJ_AUTO": {
-        "daily": [],
-        "weekly": [
-            [
-                10620.3,
-                "weekly BISI MID"
-            ]
-        ]
     },
     "NESTLEIND": {
         "daily": [
             [
                 2430,
                 "daily BISI HIGH"
-            ],
-            [
-                2409.475,
-                "daily BISI MID"
             ],
             [
                 2438,
@@ -922,41 +938,54 @@
         ]
     },
     "TATASTEEL": {
-        "daily": [],
+        "daily": [
+            [
+                150.2,
+                "daily BISI LOW"
+            ],
+            [
+                152.5,
+                "daily BISI HIGH"
+            ],
+            [
+                151.35,
+                "daily BISI MID"
+            ],
+            [
+                161.19,
+                "daily SIBI LOW"
+            ],
+            [
+                160.89999,
+                "daily SIBI HIGH"
+            ],
+            [
+                157.449995,
+                "daily SIBI MID"
+            ]
+        ],
         "weekly": []
     },
     "GRASIM": {
         "daily": [
             [
-                2798.75,
-                "daily SIBI LOW"
+                2729.5,
+                "daily BISI LOW"
+            ],
+            [
+                2748.2,
+                "daily BISI HIGH"
+            ],
+            [
+                2738.85,
+                "daily BISI MID"
             ],
             [
                 2820,
                 "daily SIBI HIGH"
-            ],
-            [
-                2809.375,
-                "daily SIBI MID"
-            ],
-            [
-                2715.3999,
-                "daily SIBI LOW"
-            ],
-            [
-                2735.3,
-                "daily SIBI HIGH"
-            ],
-            [
-                2725.34995,
-                "daily SIBI MID"
             ]
         ],
         "weekly": [
-            [
-                2621,
-                "weekly BISI LOW"
-            ],
             [
                 2640.05,
                 "weekly BISI HIGH"
@@ -970,16 +999,24 @@
     "SBILIFE": {
         "daily": [
             [
+                1750.9,
+                "daily BISI HIGH"
+            ],
+            [
                 1801.45,
                 "daily BISI LOW"
             ],
             [
-                1826,
-                "daily BISI HIGH"
-            ],
-            [
                 1813.725,
                 "daily BISI MID"
+            ],
+            [
+                1894.5,
+                "daily SIBI HIGH"
+            ],
+            [
+                1882.775,
+                "daily SIBI MID"
             ]
         ],
         "weekly": [
@@ -988,20 +1025,28 @@
                 "weekly BISI HIGH"
             ],
             [
-                1812.4,
-                "weekly BISI LOW"
+                1749.675,
+                "weekly BISI MID"
             ],
             [
-                1830.725,
-                "weekly BISI MID"
+                1812.4,
+                "weekly BISI LOW"
             ]
         ]
     },
     "LTIM": {
         "daily": [
             [
-                6088.1499,
+                6198.95,
                 "daily BISI LOW"
+            ],
+            [
+                6275,
+                "daily BISI HIGH"
+            ],
+            [
+                6236.975,
+                "daily BISI MID"
             ]
         ],
         "weekly": []
@@ -1013,14 +1058,30 @@
                 "daily BISI LOW"
             ],
             [
-                699.02502,
-                "daily BISI MID"
+                732.15002,
+                "daily SIBI LOW"
+            ],
+            [
+                734.100005,
+                "daily SIBI MID"
+            ],
+            [
+                731.25,
+                "daily SIBI HIGH"
+            ],
+            [
+                717.774995,
+                "daily SIBI MID"
             ]
         ],
         "weekly": []
     },
     "BPCL": {
         "daily": [
+            [
+                327.45001,
+                "daily BISI LOW"
+            ],
             [
                 336.35001,
                 "daily BISI HIGH"
@@ -1032,10 +1093,6 @@
             [
                 333.79999,
                 "daily BISI LOW"
-            ],
-            [
-                340.59999,
-                "daily BISI MID"
             ],
             [
                 353.54999,
@@ -1054,72 +1111,44 @@
             [
                 336.79999,
                 "weekly BISI LOW"
-            ],
-            [
-                343.5,
-                "weekly BISI HIGH"
-            ],
-            [
-                340.149995,
-                "weekly BISI MID"
             ]
         ]
     },
     "HINDALCO": {
         "daily": [
             [
-                633.95001,
+                658.59998,
                 "daily BISI LOW"
             ],
             [
-                636.5,
+                670.6,
                 "daily BISI HIGH"
             ],
             [
-                635.225005,
+                664.5999899999999,
                 "daily BISI MID"
-            ],
-            [
-                642,
-                "daily BISI LOW"
             ],
             [
                 692.70001,
                 "daily SIBI LOW"
             ],
             [
-                683.20001,
+                695.09998,
                 "daily SIBI HIGH"
             ],
             [
-                678.5,
+                693.899995,
                 "daily SIBI MID"
-            ],
-            [
-                677.54999,
-                "daily SIBI HIGH"
-            ],
-            [
-                667.25,
-                "daily SIBI HIGH"
             ]
         ],
         "weekly": [
             [
-                633.84998,
-                "weekly BISI LOW"
+                689.5,
+                "weekly SIBI HIGH"
             ],
             [
-                636.5,
-                "weekly BISI HIGH"
-            ],
-            [
-                635.17499,
-                "weekly BISI MID"
-            ],
-            [
-                642,
-                "weekly BISI LOW"
+                687.95,
+                "weekly SIBI MID"
             ]
         ]
     },
@@ -1136,43 +1165,48 @@
             [
                 5784.32495,
                 "daily BISI MID"
+            ],
+            [
+                5884.7998,
+                "daily BISI LOW"
+            ],
+            [
+                5930.05,
+                "daily BISI HIGH"
+            ],
+            [
+                5907.4249,
+                "daily BISI MID"
             ]
         ],
         "weekly": []
     },
     "DIVISLAB": {
-        "daily": [],
+        "daily": [
+            [
+                5380.0498,
+                "daily BISI HIGH"
+            ],
+            [
+                5287.1748,
+                "daily BISI MID"
+            ]
+        ],
         "weekly": []
     },
     "EICHERMOT": {
         "daily": [
             [
-                4641.9502,
+                4779.5,
                 "daily BISI LOW"
             ],
             [
-                4877.4502,
-                "daily SIBI LOW"
+                4828,
+                "daily BISI HIGH"
             ],
             [
-                4887.75,
-                "daily SIBI HIGH"
-            ],
-            [
-                4882.6001,
-                "daily SIBI MID"
-            ],
-            [
-                4780,
-                "daily SIBI LOW"
-            ],
-            [
-                4787.1499,
-                "daily SIBI HIGH"
-            ],
-            [
-                4783.57495,
-                "daily SIBI MID"
+                4803.75,
+                "daily BISI MID"
             ]
         ],
         "weekly": []
@@ -1210,43 +1244,30 @@
     "TATACONSUM": {
         "daily": [
             [
-                1143.041952,
+                1191.75,
                 "daily BISI LOW"
             ],
             [
-                1149.463536,
+                1196.25,
+                "daily BISI HIGH"
+            ],
+            [
+                1194,
+                "daily BISI MID"
+            ],
+            [
+                1195.95,
+                "daily BISI LOW"
+            ],
+            [
+                1198.6,
                 "daily BISI MID"
             ]
         ],
         "weekly": []
     },
     "DRREDDY": {
-        "daily": [
-            [
-                6914,
-                "daily SIBI LOW"
-            ],
-            [
-                6938,
-                "daily SIBI HIGH"
-            ],
-            [
-                6926,
-                "daily SIBI MID"
-            ],
-            [
-                6720.1001,
-                "daily SIBI LOW"
-            ],
-            [
-                6767,
-                "daily SIBI HIGH"
-            ],
-            [
-                6743.55005,
-                "daily SIBI MID"
-            ]
-        ],
+        "daily": [],
         "weekly": [
             [
                 6420,
@@ -1267,44 +1288,35 @@
             [
                 6568.7749,
                 "weekly BISI MID"
+            ],
+            [
+                6889.1001,
+                "weekly SIBI HIGH"
+            ],
+            [
+                6819.22505,
+                "weekly SIBI MID"
             ]
         ]
     },
     "SHRIRAMFIN": {
         "daily": [
             [
-                3100.92505,
+                3298,
+                "daily BISI LOW"
+            ],
+            [
+                3331.5,
                 "daily BISI MID"
             ]
         ],
-        "weekly": [
-            [
-                3111,
-                "weekly BISI HIGH"
-            ],
-            [
-                3190,
-                "weekly BISI LOW"
-            ],
-            [
-                3190.05,
-                "weekly BISI HIGH"
-            ],
-            [
-                3190.025,
-                "weekly BISI MID"
-            ]
-        ]
+        "weekly": []
     },
     "HEROMOTOCO": {
         "daily": [
             [
                 5517,
                 "daily BISI HIGH"
-            ],
-            [
-                5452.1499,
-                "daily BISI MID"
             ],
             [
                 5518,
@@ -1317,25 +1329,46 @@
             [
                 5533.94995,
                 "daily BISI MID"
+            ],
+            [
+                5708.7002,
+                "daily BISI LOW"
             ]
         ],
         "weekly": [
-            [
-                5443.7998,
-                "weekly BISI LOW"
-            ],
             [
                 5517,
                 "weekly BISI HIGH"
             ],
             [
-                5480.3999,
+                5518,
+                "weekly BISI LOW"
+            ],
+            [
+                5602.35,
+                "weekly BISI HIGH"
+            ],
+            [
+                5560.175,
                 "weekly BISI MID"
             ]
         ]
     },
     "APOLLOHOSP": {
-        "daily": [],
+        "daily": [
+            [
+                6953.9502,
+                "daily BISI LOW"
+            ],
+            [
+                7008.05,
+                "daily BISI HIGH"
+            ],
+            [
+                6981.0001,
+                "daily BISI MID"
+            ]
+        ],
         "weekly": []
     }
 }

@@ -1,0 +1,1 @@
+scp -i ~/Desktop/ssh_keys/flaming_machine.txt -r  ../dhan-auto-trading root@10.42.32.237:/root/yash/one
