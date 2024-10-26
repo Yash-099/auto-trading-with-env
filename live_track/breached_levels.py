@@ -1,0 +1,1 @@
+breached_levels = {'crude': [70.9, 71.46], 'nifty': []}

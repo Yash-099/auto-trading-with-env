@@ -94,4 +94,74 @@ class AnalysisAgent:
                 return {'nearest_liquidity_in_range': 0}
         else:
             return {'nearest_liquidity_in_range': 0}
-        
+  
+    def get_swings(self, data, side, strong=True):
+        swings = []
+        def get_closest(swings):
+            current_price = data[-1]['close']
+            closest_so_far = float('inf')
+            for i in swings:
+                if abs(current_price - i) < closest_so_far:
+                    closest_price = i
+                    closest_so_far = abs(current_price - i)
+            return closest_price
+        if side == 'up':
+            if strong:
+                for i in range(2, len(data)-2):
+                    candle_high = data[i]['high']
+                    previous_high = data[i-1]['high']
+                    previous_high_2 = data[i-2]['high']
+                    next_high = data[i+1]['high']
+                    next_high_2 = data[i+2]['high']
+                    if candle_high >= max(previous_high, next_high, previous_high_2, next_high_2):
+                        swings.append(candle_high)
+                    
+                    # remove purged
+                    for i in swings:
+                        if candle_high > i:
+                            swings.remove(i)
+            else:
+                for i in range(2, len(data)-2):
+                    candle_high = data[i]['high']
+                    previous_high = data[i-1]['high']
+                    next_high = data[i+1]['high']
+                    if candle_high >= max(previous_high, next_high):
+                        swings.append(candle_high)
+                    
+                    # remove purged
+                    for i in swings:
+                        if candle_high > i:
+                            swings.remove(i)
+
+        elif side == 'down':
+            if strong:
+                for i in range(2, len(data)-2):
+                    candle_low = data[i]['low']
+                    previous_low = data[i-1]['low']
+                    previous_low_2 = data[i-2]['low']
+                    next_low = data[i+1]['low']
+                    next_low_2 = data[i+2]['low']
+                    if candle_low <= min(previous_low, next_low, previous_low_2, next_low_2):
+                        swings.append(candle_low)
+                    
+                    # remove purged
+                    for i in swings:
+                        if candle_low < i:
+                            swings.remove(i)
+            else:
+                for i in range(2, len(data)-2):
+                    candle_low = data[i]['low']
+                    previous_low = data[i-1]['low']
+                    next_low = data[i+1]['low']
+                    if candle_low <= min(previous_low,next_low):
+                        swings.append(candle_low)
+                    
+                    # remove purged
+                    for i in swings:
+                        if candle_low < i:
+                            swings.remove(i)
+
+        else:
+            raise Exception('side should be either up or down')
+    
+        return list(set(swings)), get_closest(swings)
