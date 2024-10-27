@@ -1,5 +1,4 @@
 from analysis_utils import *
-from trade_utils import *
 from tvDatafeed import Interval
 from config import *
 import time
