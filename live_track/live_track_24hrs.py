@@ -3,11 +3,11 @@ from trade_utils import *
 from tvDatafeed import Interval
 from config import *
 import time
-from datetime import date, datetime
+from datetime import datetime
 import os
-from pathlib import Path
-from tqdm import tqdm
-import pandas as pd
+from live_track.detect_sims import *
+from argparse import ArgumentParser
+import logging
 
 def read_levels(instrument):
     # read from the levels.py file
@@ -25,66 +25,80 @@ def read_breached_levels(instrument):
 
 def show_notification(title, message):
     os.system(f"osascript -e 'display notification \"{message}\" with title \"{title}\"'")
+    # send_notification.notify(title, message)
 
 def alert(time, instrument, level):
     message = f'{instrument}: near {level}'
     log_message = f'{time}: '+message
-    print(log_message)
+    logger.info(log_message)
     file = open('log_file.txt', 'a')
     file.write(log_message+'\n')
     file.close()
     show_notification(instrument, message)
 
-def check_for_triggers(levels, breached_levels, hour_high, hour_low):
+def check_for_triggers(levels, instrument, breached_levels, hour_high, hour_low):
     for level in levels:
         if hour_high >= level and hour_low <= level:
             if level not in breached_levels:
                 breached_levels.append(level)
-                alert(datetime.now(), 'crude', level)
+                alert(datetime.now(), instrument, level)
+                return level
+    return None
 
 def update_breached_levels(instrument, levels):
     import breached_levels
-    print('updating breached levels', levels)
+    logger.info('updating breached levels '+ str(levels))
     breached_levels.breached_levels[instrument] = levels
     # write in the file
     with open('breached_levels.py', 'w') as f:
         f.write(f'breached_levels = {breached_levels.breached_levels}')
 
 if __name__ == '__main__':
-    
+    logger = logging.getLogger(__name__)
+    logging.basicConfig(filename='log_file.txt', encoding='utf-8', level=logging.DEBUG)
+    parser = ArgumentParser()
+    parser.add_argument("--instrument", dest='instrument',  help="instrument to track, supported USOIL and NIFTY")
+    args = parser.parse_args()
     data_agent = DataAgent()
-
+    mohawk_allowed = 0.002 # 0.2%
+    instrument_config = {
+        'USOIL': {'exchange': 'TVC', 'futures':False},
+        'NIFTY': {'exchange': 'NSE', 'futures':True}
+    }
+    instrument = args.instrument
+    exchange = instrument_config[instrument]['exchange']
+    futures = instrument_config[instrument]['futures']
     try:
         while True:
             try:
-                crude_levels = read_levels('crude')
-                nifty_levels = read_levels('nifty')
-                print('crude levels', crude_levels)
-                print('nifty levels', nifty_levels)
-                breached_crude_levels = read_breached_levels('crude')
-                breached_nifty_levels = read_breached_levels('nifty')
-                
-                crude_data = data_agent.get_ohlc_data("USOIL", Interval.in_1_hour, 1, exchange='TVC')
-                print(crude_data)
-                hour_high = crude_data[0]['high']
-                hour_low = crude_data[0]['low']
-                check_for_triggers(crude_levels, breached_crude_levels, hour_high, hour_low)
-                print("breached_levels", breached_crude_levels)
-                update_breached_levels('crude', breached_crude_levels)
+                # this is in while loop because we want to keep checking the levels in real time
+                instrument_levels = read_levels(instrument)
+                breached_levels = read_breached_levels(instrument)
+                data = data_agent.get_ohlc_data(instrument, Interval.in_1_hour, 1, exchange, futures)
+                hour_high = data[0]['high']
+                hour_low = data[0]['low']
+                level = check_for_triggers(instrument_levels, instrument, breached_levels, hour_high, hour_low)
+                logger.info(f'Current levels: {level}')
+                # start the code to check SIMS
+                if level:
+                    update_breached_levels(instrument, breached_levels)
+                    data = data_agent.get_ohlc_data(instrument, Interval.in_1_hour, 2, exchange, futures)
+                    if min(data[0]['high'], data[0]['low']) > level: # it is a support level
+                        direction = 'up'
+                    elif max(data[0]['high'], data[0]['low']) < level: # it is a resistance level
+                        direction = 'down'
+                    else: # our logic of previous candle based support resistance idea is wrong
+                        logger.warning('Support resistance logic failed')
 
-                nifty_data = data_agent.get_ohlc_data("NIFTY", Interval.in_1_hour, 1, exchange='NSE', futures=True)
-                print(nifty_data)
-                hour_high = nifty_data[0]['high']
-                hour_low = nifty_data[0]['low']
-                check_for_triggers(nifty_levels, breached_nifty_levels, hour_high, hour_low)
-                print("breached_levels", breached_nifty_levels)
-                update_breached_levels('nifty', breached_nifty_levels)
+                    detect_shift(level, direction=direction, instrument=instrument, exchange=exchange, mohawk_allowed=mohawk_allowed)
+
                 time.sleep(60) # check every minute
 
             except Exception as e:
-                time.sleep(3)
+                logger.error(f'Error in main loop: {e}')
+                time.sleep(5)
                 continue
-            
+
     except KeyboardInterrupt:
         print("Keyboard interrupt detected. Exiting...")
         exit(0)

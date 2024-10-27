@@ -7,3 +7,4 @@ matplotlib
 arrow
 moviepy 
 opencv-python
+pushbullet.py
