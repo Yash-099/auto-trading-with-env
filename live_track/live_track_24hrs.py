@@ -25,7 +25,7 @@ def read_breached_levels(instrument):
 
 def show_notification(title, message):
     os.system(f"osascript -e 'display notification \"{message}\" with title \"{title}\"'")
-    # send_notification.notify(title, message)
+    send_notification.notify(title, message)
 
 def alert(time, instrument, level):
     message = f'{instrument}: near {level}'
@@ -53,6 +53,28 @@ def update_breached_levels(instrument, levels):
     with open('breached_levels.py', 'w') as f:
         f.write(f'breached_levels = {breached_levels.breached_levels}')
 
+def stop_tracking(instrument, instrument_config, time_now, day):
+    if instrument == 'USOIL':
+        if day == 'Saturday':
+            return True
+        elif day == 'Sunday': # on sunday trading starts at 22:00
+            if time_now < instrument_config[instrument]['start_time']:
+                return True
+        elif day == 'Friday': # on friday unlike other weekdays trading does not start at 22:00
+            if time_now > instrument_config[instrument]['end_time']:
+                return True
+        else: # week days
+            if time_now < instrument_config[instrument]['start_time'] and time_now > instrument_config[instrument]['end_time']:
+                return True
+    
+    elif instrument == 'NIFTY':
+        if day == 'Saturday' or day == 'Sunday':
+            return True
+        else: # week days
+            if time_now < instrument_config[instrument]['start_time'] or time_now > instrument_config[instrument]['end_time']:
+                return True
+    return False
+
 if __name__ == '__main__':
     logger = logging.getLogger(__name__)
     logging.basicConfig(filename='log_file.txt', encoding='utf-8', level=logging.DEBUG)
@@ -62,14 +84,27 @@ if __name__ == '__main__':
     data_agent = DataAgent()
     mohawk_allowed = 0.002 # 0.2%
     instrument_config = {
-        'USOIL': {'exchange': 'TVC', 'futures':False},
-        'NIFTY': {'exchange': 'NSE', 'futures':True}
+        'USOIL': {'exchange': 'TVC', 
+                  'futures':False, 
+                  'start_time': datetime.strptime("22:00:00", "%H:%M:%S").time(), 
+                  'end_time': datetime.strptime("20:00:00", "%H:%M:%S").time()},
+        'NIFTY': {'exchange': 'NSE', 
+                  'futures':True,
+                  'start_time': datetime.strptime("03:45:00", "%H:%M:%S").time(), 
+                  'end_time': datetime.strptime("10:00:00", "%H:%M:%S").time()}
     }
     instrument = args.instrument
     exchange = instrument_config[instrument]['exchange']
     futures = instrument_config[instrument]['futures']
+
+    day = datetime.now().strftime("%A")
+    time_now =  datetime.now().time()
+    
     try:
         while True:
+            if stop_tracking(instrument, instrument_config, time_now, day):
+                continue
+            logger.info(f'Tracking {instrument}... time: { datetime.now()}')
             try:
                 # this is in while loop because we want to keep checking the levels in real time
                 instrument_levels = read_levels(instrument)
