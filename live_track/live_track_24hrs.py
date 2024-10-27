@@ -104,7 +104,6 @@ if __name__ == '__main__':
         while True:
             if stop_tracking(instrument, instrument_config, time_now, day):
                 continue
-            logger.info(f'Tracking {instrument}... time: { datetime.now()}')
             try:
                 # this is in while loop because we want to keep checking the levels in real time
                 instrument_levels = read_levels(instrument)
