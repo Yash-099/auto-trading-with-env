@@ -1,1 +1,1 @@
-breached_levels = {'USOIL': [70.9, 71.46, 71.575], 'NIFTY': [24190]}
+breached_levels = {'USOIL': [70.9, 71.46, 71.575], 'NIFTY': [24190, 24186.1]}

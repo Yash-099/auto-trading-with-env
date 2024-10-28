@@ -23,7 +23,7 @@ def alert(time, instrument, level):
     show_notification(instrument, message)
 
 
-def detect_shift(level, direction, instrument, exchange, futures=False, mohawk_allowed=0.002):
+def detect_shift(level, direction, instrument, exchange, logger, futures=False, mohawk_allowed=0.002):
     data_agent = DataAgent()
     analysis_agent = AnalysisAgent()
     try:
@@ -34,23 +34,23 @@ def detect_shift(level, direction, instrument, exchange, futures=False, mohawk_a
                     _, closest = analysis_agent.get_swings(crude_data, 'up')
                     # market shifted and alert sent
                     if crude_data[-1]['close'] > closest:
-                        print('market_shifted')
+                        logger.info('market shifted in the up side')
                         alert(datetime.now(), instrument, level)
                         break
                     # market not respecting the level
                     if crude_data[-1]['close'] < level* (1-mohawk_allowed):
-                        print('level breached')
+                        logger.info('level breached going back to tracking')
                         break
                 else:
                     _, closest = analysis_agent.get_swings(crude_data, 'down')
                     # market shifted and alert sent
                     if crude_data[-1]['close'] < closest:
-                        print('market_shifted')
+                        logger.info('market shifted in the down side')
                         alert(datetime.now(), instrument, level)
                         break
                     # market not respecting the level
                     if crude_data[-1]['close'] > level* (1+mohawk_allowed):
-                        print('level breached')
+                        logger.info('level breached going back to tracking')
                         break
 
             except Exception as e:

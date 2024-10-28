@@ -77,7 +77,7 @@ def stop_tracking(instrument, instrument_config, time_now, day):
 
 if __name__ == '__main__':
     logger = logging.getLogger(__name__)
-    logging.basicConfig(filename='log_file.txt', encoding='utf-8', level=logging.DEBUG)
+    logging.basicConfig(filename='log_file.txt', encoding='utf-8', level=logging.INFO)
     parser = ArgumentParser()
     parser.add_argument("--instrument", dest='instrument',  help="instrument to track, supported USOIL and NIFTY")
     args = parser.parse_args()
@@ -108,23 +108,25 @@ if __name__ == '__main__':
                 # this is in while loop because we want to keep checking the levels in real time
                 instrument_levels = read_levels(instrument)
                 breached_levels = read_breached_levels(instrument)
-                data = data_agent.get_ohlc_data(instrument, Interval.in_1_hour, 1, exchange, futures)
-                hour_high = data[0]['high']
-                hour_low = data[0]['low']
+                data = data_agent.get_ohlc_data(instrument, Interval.in_1_hour, 2, exchange, futures)
+                # we took the max and min of two candles for the scenario when the level touching happens when we are not checking and the hour changes
+                hour_high = max(data[0]['high'], data[1]['high'])
+                hour_low = min(data[0]['low'], data[1]['low'])
                 level = check_for_triggers(instrument_levels, instrument, breached_levels, hour_high, hour_low)
-                logger.info(f'Current levels: {level}')
                 # start the code to check SIMS
                 if level:
                     update_breached_levels(instrument, breached_levels)
-                    data = data_agent.get_ohlc_data(instrument, Interval.in_1_hour, 2, exchange, futures)
+                    data = data_agent.get_ohlc_data(instrument, Interval.in_5_minute, 2, exchange, futures)
                     if min(data[0]['high'], data[0]['low']) > level: # it is a support level
+                        logger.info('Support level detected, we look for SIMS now.')
                         direction = 'up'
                     elif max(data[0]['high'], data[0]['low']) < level: # it is a resistance level
+                        logger.info('Resistance level detected, we look for SIMS now.')
                         direction = 'down'
                     else: # our logic of previous candle based support resistance idea is wrong
-                        logger.warning('Support resistance logic failed')
+                        logger.warning('Level detected but not sure of the direction look for SIMS')
 
-                    detect_shift(level, direction=direction, instrument=instrument, exchange=exchange, mohawk_allowed=mohawk_allowed)
+                    detect_shift(level, direction, instrument, exchange, logger, mohawk_allowed=mohawk_allowed)
 
                 time.sleep(60) # check every minute
 
