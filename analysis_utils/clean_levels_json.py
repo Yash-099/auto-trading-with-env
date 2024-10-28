@@ -13,7 +13,7 @@ def remove_duplicates(data_json):
         for j in data_json[i]:
             present = False
             for k in levels_till_now:
-                if abs(j-k)/j < 0.002:
+                if abs(j-k)/j < 0.001:
                     present = True
                     break
             if not present:
@@ -28,13 +28,16 @@ try:
     input_json = json.loads(sys.argv[1])
     kaam_ki_json = input_json['payload']['sources']
     for i in kaam_ki_json:
+        if kaam_ki_json[i]['state']['type'] == 'LineToolFibRetracement':
+            continue
         print(kaam_ki_json[i]['state']['type'], kaam_ki_json[i]['state']['points'])
         if kaam_ki_json[i]['state']['state']['interval'] in cleaned_levels:
             for point in kaam_ki_json[i]['state']['points']:
                 cleaned_levels[kaam_ki_json[i]['state']['state']['interval']].append(point['price'])
             if kaam_ki_json[i]['state']['type'] == 'LineToolRectangle':
                 points = kaam_ki_json[i]['state']['points']
-                cleaned_levels[kaam_ki_json[i]['state']['state']['interval']].append((points[0]['price'] + points[1]['price'])/2)
+                if (points[0]['price'] - points[1]['price']) > (0.002 * points[0]['price']):
+                    cleaned_levels[kaam_ki_json[i]['state']['state']['interval']].append((points[0]['price'] + points[1]['price'])/2)
     cleaned_levels_new = remove_duplicates(cleaned_levels)
     print(cleaned_levels_new)
 except FileNotFoundError:
