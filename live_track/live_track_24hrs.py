@@ -77,7 +77,7 @@ def stop_tracking(instrument, instrument_config, time_now, day):
 
 if __name__ == '__main__':
     logger = logging.getLogger(__name__)
-    logging.basicConfig(filename='log_file.txt', encoding='utf-8', level=logging.INFO)
+    logging.basicConfig(filename='log_file.txt', level=logging.INFO)
     parser = ArgumentParser()
     parser.add_argument("--instrument", dest='instrument',  help="instrument to track, supported USOIL and NIFTY")
     args = parser.parse_args()
