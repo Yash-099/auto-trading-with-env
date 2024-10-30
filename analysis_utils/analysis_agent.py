@@ -1,3 +1,4 @@
+import copy
 class AnalysisAgent:
     def find_fvg_bisi(self, data, remove_rebalanced=True):
         bisi = []
@@ -100,6 +101,8 @@ class AnalysisAgent:
         def get_closest(swings):
             current_price = data[-1]['close']
             closest_so_far = float('inf')
+            if swings == []:
+                return 0
             for i in swings:
                 if abs(current_price - i) < closest_so_far:
                     closest_price = i
@@ -115,11 +118,15 @@ class AnalysisAgent:
                     next_high_2 = data[i+2]['high']
                     if candle_high >= max(previous_high, next_high, previous_high_2, next_high_2):
                         swings.append(candle_high)
-                    
                     # remove purged
-                    for i in swings:
-                        if candle_high > i:
-                            swings.remove(i)
+                    removed = True
+                    while removed:
+                        removed = False
+                        for i in swings:
+                            if candle_high > i:
+                                removed = True
+                                swings.remove(i)
+                            
             else:
                 for i in range(2, len(data)-2):
                     candle_high = data[i]['high']
@@ -127,11 +134,14 @@ class AnalysisAgent:
                     next_high = data[i+1]['high']
                     if candle_high >= max(previous_high, next_high):
                         swings.append(candle_high)
-                    
                     # remove purged
-                    for i in swings:
-                        if candle_high > i:
-                            swings.remove(i)
+                    removed = True
+                    while removed:
+                        removed = False
+                        for i in swings:
+                            if candle_high > i:
+                                removed = True
+                                swings.remove(i)
 
         elif side == 'down':
             if strong:
@@ -145,9 +155,13 @@ class AnalysisAgent:
                         swings.append(candle_low)
                     
                     # remove purged
-                    for i in swings:
-                        if candle_low < i:
-                            swings.remove(i)
+                    removed = True
+                    while removed:
+                        removed = False
+                        for i in swings:
+                            if candle_low < i:
+                                removed = True
+                                swings.remove(i)
             else:
                 for i in range(2, len(data)-2):
                     candle_low = data[i]['low']
@@ -157,9 +171,13 @@ class AnalysisAgent:
                         swings.append(candle_low)
                     
                     # remove purged
-                    for i in swings:
-                        if candle_low < i:
-                            swings.remove(i)
+                    removed = True
+                    while removed:
+                        removed = False
+                        for i in swings:
+                            if candle_low < i:
+                                removed = True
+                                swings.remove(i)
 
         else:
             raise Exception('side should be either up or down')
