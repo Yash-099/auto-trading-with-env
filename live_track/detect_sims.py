@@ -12,6 +12,7 @@ import pandas as pd
 import logging
 def show_notification(title, message):
     os.system(f"osascript -e 'display notification \"{message}\" with title \"{title}\"'")
+    logger.info(f'sending pushbullet notification with title: {title} and message: {message}')
     send_notification.notify(title, message)
 
 def alert(time, instrument, level, direction):
@@ -57,26 +58,26 @@ def detect_shift(level, direction, instrument, exchange, logger, futures=False, 
                     _, closest = analysis_agent.get_swings(crude_data, 'up')
                     logger.info(f'{instrument} closest swing high- {closest}')
                     # market shifted and alert sent
-                    if crude_data[-1]['close'] > closest:
+                    if crude_data[-1]['high'] > closest:
                         logger.info(f'{instrument} shifted in the up side')
                         alert(datetime.now(), instrument, level, direction)
                         break
                     # market not respecting the level
                     if level:
-                        if crude_data[-1]['close'] < level* (1-mohawk_allowed):
+                        if crude_data[-1]['high'] < level* (1-mohawk_allowed):
                             logger.info('level breached going back to tracking')
                             break
                 elif direction == 'down':
                     _, closest = analysis_agent.get_swings(crude_data, 'down')
                     logger.info(f'{instrument} closest swing low- {closest}')
                     # market shifted and alert sent
-                    if crude_data[-1]['close'] < closest:
+                    if crude_data[-1]['low'] < closest:
                         logger.info(f'{instrument} shifted in the down side')
                         alert(datetime.now(), instrument, level, direction)
                         break
                     # market not respecting the level
                     if level:
-                        if crude_data[-1]['close'] > level* (1+mohawk_allowed):
+                        if crude_data[-1]['low'] > level* (1+mohawk_allowed):
                             logger.info('level breached going back to tracking')
                             break
                 else:
@@ -94,7 +95,7 @@ def detect_shift(level, direction, instrument, exchange, logger, futures=False, 
 
 if __name__ == '__main__':
     logger = logging.getLogger(__name__)
-    logging.basicConfig(filename='log_file.txt', level=logging.INFO, format='%(asctime)s %(message)s')
+    logging.basicConfig(filename='log_file.txt', level=logging.DEBUG, format='%(asctime)s %(message)s')
 
     parser = ArgumentParser()
     parser.add_argument("--instrument", dest='instrument',  help="instrument to track, supported USOIL and NIFTY")

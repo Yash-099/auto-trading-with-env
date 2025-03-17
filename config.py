@@ -79,7 +79,7 @@ small_cap_stocks = [
     "CESC",
     "GRAPHITE",
     "CEATLTD",
-    "CENTURYTEX",
+    "ABREL",
     "EXIDEIND",
     "DEEPAKFERT",
     "EIDPARRY",
