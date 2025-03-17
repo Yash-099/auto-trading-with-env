@@ -24,7 +24,11 @@ class FVGS:
         data_agent = DataAgent()
         try:
             data = data_agent.get_ohlc_data(stock, time_frame, candles)
-        except:
+        except Exception as e:
+            if "'NoneType' object has no attribute 'iloc'" in str(e):
+                print(f'not sufficient data dropping {stock}')
+                return []
+            print(e) 
             time.sleep(5)
             return self.get_bisis(stock, time_frame, candles)
 

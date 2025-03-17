@@ -13,12 +13,23 @@ class AnalysisAgent:
         else:
             unpurged_bisi = []
             for fvg in bisi:
-                purged = False
-                for candle in data:
+                high_purged = False
+                low_purged = False
+                mid_purged = False
+                fvg['mid'] = (fvg['low']+fvg['high'])/2
+                for candle in data[:-1]: # skipping the last candle for purge check
                     if candle['datetime'] > fvg['datetime']:
                         if candle['low'] < fvg['low']:
-                            purged = True
-                if not purged:
+                            low_purged = True
+                        if candle['low'] < fvg['high']:
+                            high_purged = True
+                        if candle['low'] < fvg['mid']:
+                            mid_purged = True
+                        
+                if not low_purged:
+                    fvg['high_purged'] = high_purged
+                    fvg['mid_purged'] = mid_purged
+                    fvg['low_purged'] = low_purged
                     unpurged_bisi.append(fvg)
             return unpurged_bisi
 
@@ -183,3 +194,26 @@ class AnalysisAgent:
             raise Exception('side should be either up or down')
     
         return list(set(swings)), get_closest(swings)
+    
+    def if_level_purged_by_candle(self, candle_high, candle_low, level):
+        if candle_high >= level and candle_low <= level:
+            return True
+        return False
+    
+    def find_bullish_orderblocks(self, data):
+        orderblocks = []
+        for i in range(1, len(data)-1):
+            if data[i-1]['open'] > data[i-1]['close'] and data[i]['open'] < data[i]['close']: # i-1 is black and i is green
+                orderblocks.append(data[i-1])
+        # remove purged
+        unpurged_orderblocks = []
+        for i in orderblocks:
+            purged = False
+            for candle in data:
+                if candle['datetime'] > i['datetime']:
+                    if candle['low'] < i['close']:
+                        purged = True
+                        break
+            if not purged:
+                unpurged_orderblocks.append(i)
+        return unpurged_orderblocks

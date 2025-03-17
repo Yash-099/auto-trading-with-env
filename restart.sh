@@ -18,4 +18,4 @@ echo "$processes" | awk '{print $2}' | xargs kill -9
 
 echo "USOIL and NIFTY processes have been terminated."
 
-./start_live_track.sh
+# ./start_live_track.sh
