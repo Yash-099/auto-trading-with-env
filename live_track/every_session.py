@@ -46,11 +46,21 @@ if __name__ == '__main__':
 
     day = datetime.now().strftime("%A")
     
+    def market_closed():
+        if day in ['Saturday', 'Sunday']:
+            return True
+        if get_time_now().hour < 9 or get_time_now().hour > 15:
+            return True
+        return False
     
     i = 0
     # mock_data = data_agent.get_ohlc_data(instrument, Interval.in_5_minute, 75, exchange)
     try:
         while True:
+            if market_closed():
+                print('market closed')
+                time.sleep(10)
+                continue
             #start tracking at session + 5mins
             highest_candle_data = {}
             lowest_candle_data = {}
@@ -64,7 +74,8 @@ if __name__ == '__main__':
             breached_downside = False
             breached_upside = False
             print(current_time)
-            if current_time > session_start_plus_5:
+            print(day)
+            if current_time > session_start_plus_5 and day not in ['Saturday', 'Sunday']:
                 print('tracking')
                 try:
                     while True:
@@ -94,7 +105,7 @@ if __name__ == '__main__':
                         if current_time > session_start_plus_50:
                             break # break the session loop after 50 mins
                         time.sleep(300)
-                    i += 1
+                    i = (i + 1) % 4
                 except Exception as e:
                     print(e)
                     print(e, 'error in main loop')
