@@ -83,10 +83,10 @@ if __name__ == '__main__':
                             breached_upside = False
 
                         if session_high - session_low > 0: # meaning both are set
-                            if candle_data["close"] > lowest_candle_data["high"]:
+                            if candle_data["close"] > lowest_candle_data["high"] and not breached_upside:
                                 show_notification(f'Breached to the upside', f'sample text', logger)
                                 breached_upside = True
-                            if candle_data["close"] < highest_candle_data["low"]:
+                            if candle_data["close"] < highest_candle_data["low"] and not breached_downside:
                                 show_notification(f'Breached to the downside', f'sample text', logger)
                                 breached_downside = True
 
