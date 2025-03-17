@@ -5,3 +5,4 @@ log_dump
 *.json
 !updated_crucial_levels.json
 dhan_env/*
+venv/*
