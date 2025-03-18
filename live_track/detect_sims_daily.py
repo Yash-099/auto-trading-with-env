@@ -20,7 +20,7 @@ def alert(stock, direction):
 def detect_shift(direction, logger):
     data_agent = DataAgent()
     analysis_agent = AnalysisAgent()
-    stocks = nifty_50_stocks + small_cap_stocks + mid_cap_stocks
+    stocks = nifty_50_stocks + mid_cap_stocks + small_cap_stocks
     filtered_stocks = []
     try:
         for i in tqdm(range(len(stocks))):

@@ -23,6 +23,15 @@ def get_time_now():
 def get_date_now():
     return (datetime.now()+timedelta(hours=5, minutes=30)).date()
 
+def set_market_condition(condition):
+    print(f"Setting market condition: {condition}")
+    with open("market_condition.txt", "w") as file:
+        file.write(condition)
+
+def reset_market_condition():
+    with open("market_condition.txt", "w") as file:
+        file.write("none")
+
 if __name__ == '__main__':
     logger = logging.getLogger(__name__)
     logging.basicConfig(filename='log_file.txt', level=logging.INFO)
@@ -97,14 +106,17 @@ if __name__ == '__main__':
                             if candle_data["close"] > lowest_candle_data["high"] and not breached_upside:
                                 show_notification(f'Breached to the upside', f'sample text', logger)
                                 breached_upside = True
+                                set_market_condition(f"buy @ {candle_data['close']}")
                             if candle_data["close"] < highest_candle_data["low"] and not breached_downside:
                                 show_notification(f'Breached to the downside', f'sample text', logger)
                                 breached_downside = True
+                                set_market_condition(f"sell @ {candle_data['close']}")
 
                         current_time = datetime.combine(get_date_now(), time_now)
                         if current_time > session_start_plus_50:
                             break # break the session loop after 50 mins
                         time.sleep(300)
+                        reset_market_condition()
                     i = (i + 1) % 4
                 except Exception as e:
                     print(e)
