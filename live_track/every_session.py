@@ -104,13 +104,21 @@ if __name__ == '__main__':
 
                         if session_high - session_low > 0: # meaning both are set
                             if candle_data["close"] > lowest_candle_data["high"] and not breached_upside:
-                                show_notification(f'Breached to the upside', f'sample text', logger)
+                                show_notification(f'Upside', '', logger)
+                                candle_close = candle_data["close"]
+                                sl = lowest_candle_data["low"]
+                                tp = candle_close + (candle_close - sl)
+                                show_notification(f'BUY','PRICE: {candle_close}\nSL: {sl}\nTP: {tp}', logger)
                                 breached_upside = True
-                                set_market_condition(f"buy @ {candle_data['close']}")
+                                set_market_condition(f"buy @ {candle_close}")
                             if candle_data["close"] < highest_candle_data["low"] and not breached_downside:
-                                show_notification(f'Breached to the downside', f'sample text', logger)
+                                show_notification(f'Downside', '', logger)
+                                candle_close = candle_data["close"]
+                                sl = highest_candle_data["high"]
+                                tp = candle_close - (sl - candle_close)
+                                show_notification(f'SELL','PRICE: {candle_close}\nSL: {sl}\nTP: {tp}', logger)
                                 breached_downside = True
-                                set_market_condition(f"sell @ {candle_data['close']}")
+                                set_market_condition(f"sell @ {candle_close}")
 
                         current_time = datetime.combine(get_date_now(), time_now)
                         if current_time > session_start_plus_50:

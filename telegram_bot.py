@@ -160,7 +160,6 @@ async def check_market_condition(application: Application) -> None:
 def some_market_check_function() -> bool:
     """Dummy function to simulate a market condition check. Replace with real logic."""
     # this will read market condition from a txt file
-    return "buy @18000"
     with open("market_condition.txt", "r") as file:
         market_condition = file.read()
     if "buy" in market_condition or "sell" in market_condition:

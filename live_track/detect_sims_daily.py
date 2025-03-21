@@ -20,36 +20,37 @@ def alert(stock, direction):
 def detect_shift(direction, logger):
     data_agent = DataAgent()
     analysis_agent = AnalysisAgent()
-    stocks = nifty_50_stocks + mid_cap_stocks + small_cap_stocks
-    filtered_stocks = []
+    stocks = {"nifty_50_stocks": nifty_50_stocks, "mid_cap_stocks": mid_cap_stocks, "small_cap_stocks": small_cap_stocks}
+    filtered_stocks = {stock_list_name: [] for stock_list_name in stocks.keys()}
     try:
-        for i in tqdm(range(len(stocks))):
-            try:
-                stock = stocks[i]
-                data = data_agent.get_ohlc_data(stock, Interval.in_daily, 100, exchange='NSE')
-                if direction == 'up':
-                    _, closest = analysis_agent.get_swings(data, 'up')
-                    # market shifted and alert sent
-                    if data[-1]['high'] > closest:
-                        logger.info(f'{stock} shifted in the up side')
-                        alert(stock, direction)
-                        filtered_stocks.append(stock)
-                    
-                elif direction == 'down':
-                    _, closest = analysis_agent.get_swings(data, 'down')
-                    logger.info(f'{stock} closest swing low- {closest}')
-                    # market shifted and alert sent
-                    if data[-1]['low'] < closest:
-                        logger.info(f'{stock} shifted in the down side')
-                        alert(stock, direction)
+        for stock_list_name, stock_list in stocks.items():
+            for stock in tqdm(stock_list):
+                try:
+                    data = data_agent.get_ohlc_data(stock, Interval.in_daily, 100, exchange='NSE')
+                    if direction == 'up':
+                        _, closest = analysis_agent.get_swings(data, 'up')
+                        # market shifted and alert sent
+                        if data[-1]['high'] > closest:
+                            logger.info(f'{stock} shifted in the up side')
+                            alert(stock, direction)
+                            filtered_stocks[stock_list_name].append(stock)
+                        
+                    elif direction == 'down':
+                        _, closest = analysis_agent.get_swings(data, 'down')
+                        logger.info(f'{stock} closest swing low- {closest}')
+                        # market shifted and alert sent
+                        if data[-1]['low'] < closest:
+                            logger.info(f'{stock} shifted in the down side')
+                            alert(stock, direction)
+                            filtered_stocks[stock_list_name].append(stock)
 
-                else:
-                    logger.error('direction provided not known')
-                    exit(0)
+                    else:
+                        logger.error('direction provided not known')
+                        exit(0)
 
-            except Exception as e:
-                logger.error(e)
-                print('error:', e)
+                except Exception as e:
+                    logger.error(e)
+                    print('error:', e)
         print('filtered stocks:', filtered_stocks)
     except KeyboardInterrupt:
         print('stopping')
