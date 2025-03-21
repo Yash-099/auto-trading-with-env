@@ -11,17 +11,14 @@ from tqdm import tqdm
 import pandas as pd
 import logging
 def show_notification(title, message):
-    os.system(f"osascript -e 'display notification \"{message}\" with title \"{title}\"'")
-    logger.info(f'sending pushbullet notification with title: {title} and message: {message}')
-    send_notification.notify(title, message)
+    send_notification.notify(title, message, logger)
 
 def alert(time, instrument, level, direction):
-    message = f'{instrument}: broke the market structure from {level} in the {direction} side'
-    # log_message = f'{time}: '+message
-    # print(log_message)
-    # file = open('log_file.txt', 'a')
-    # file.write(log_message+'\n')
-    # file.close()
+    message = 'NONE'
+    if direction == 'up':
+        message = f'Took buyside'
+    elif direction == 'down':
+        message = f'Took sellside'
     show_notification(instrument, message)
 
 def stop_tracking(instrument, instrument_config, time_now, day):
@@ -53,33 +50,47 @@ def detect_shift(level, direction, instrument, exchange, logger, futures=False, 
     try:
         while True:
             try:
-                crude_data = data_agent.get_ohlc_data(instrument, Interval.in_5_minute, 100, exchange=exchange, futures=futures)
+                data = data_agent.get_ohlc_data(instrument, Interval.in_5_minute, 100, exchange=exchange, futures=futures)
                 if direction == 'up':
-                    _, closest = analysis_agent.get_swings(crude_data, 'up')
+                    _, closest = analysis_agent.get_swings(data, 'up', strong=False)
                     logger.info(f'{instrument} closest swing high- {closest}')
                     # market shifted and alert sent
-                    if crude_data[-1]['high'] > closest:
+                    if data[-1]['high'] > closest:
                         logger.info(f'{instrument} shifted in the up side')
                         alert(datetime.now(), instrument, level, direction)
                         break
                     # market not respecting the level
                     if level:
-                        if crude_data[-1]['high'] < level* (1-mohawk_allowed):
+                        if data[-1]['high'] < level* (1-mohawk_allowed):
                             logger.info('level breached going back to tracking')
                             break
                 elif direction == 'down':
-                    _, closest = analysis_agent.get_swings(crude_data, 'down')
+                    _, closest = analysis_agent.get_swings(data, 'down', strong=False)
                     logger.info(f'{instrument} closest swing low- {closest}')
                     # market shifted and alert sent
-                    if crude_data[-1]['low'] < closest:
+                    if data[-1]['low'] < closest:
                         logger.info(f'{instrument} shifted in the down side')
                         alert(datetime.now(), instrument, level, direction)
                         break
                     # market not respecting the level
                     if level:
-                        if crude_data[-1]['low'] > level* (1+mohawk_allowed):
+                        if data[-1]['low'] > level* (1+mohawk_allowed):
                             logger.info('level breached going back to tracking')
                             break
+                elif direction == 'both':
+                    _, closest_high = analysis_agent.get_swings(data, 'up', strong=False)
+                    _, closest_low = analysis_agent.get_swings(data, 'down', strong=False)
+                    logger.info(f'{instrument} closest swing high- {closest_high}')
+                    logger.info(f'{instrument} closest swing low- {closest_low}')
+                    # market shifted and alert sent
+                    if data[-1]['high'] > closest_high:
+                        logger.info(f'{instrument} shifted in the up side')
+                        alert(datetime.now(), instrument, level, 'up')
+                        break
+                    if data[-1]['low'] < closest_low:
+                        logger.info(f'{instrument} shifted in the down side')
+                        alert(datetime.now(), instrument, level, 'down')
+                        break
                 else:
                     logger.error('direction provided not known')
                     exit(0)
@@ -108,9 +119,9 @@ if __name__ == '__main__':
                   'start_time': datetime.strptime("22:00:00", "%H:%M:%S").time(), 
                   'end_time': datetime.strptime("20:00:00", "%H:%M:%S").time()},
         'NIFTY': {'exchange': 'NSE', 
-                  'futures':True,
-                  'start_time': datetime.strptime("03:45:00", "%H:%M:%S").time(), 
-                  'end_time': datetime.strptime("10:00:00", "%H:%M:%S").time()}
+                  'futures':False,
+                  'start_time': datetime.strptime("09:15:00", "%H:%M:%S").time(), 
+                  'end_time': datetime.strptime("15:30:00", "%H:%M:%S").time()}
     }
     instrument = args.instrument
     exchange = instrument_config[instrument]['exchange']
@@ -118,6 +129,8 @@ if __name__ == '__main__':
 
     while True:
         if stop_tracking(args.instrument, instrument_config, datetime.now().time(), datetime.now().strftime("%A")):
+            print(f'{instrument} is not trading today')
             continue
+
         detect_shift(None, args.direction, instrument, exchange, logger, futures=futures)
-        time.sleep(1200) # sleep for 2 candles
+        time.sleep(300)
