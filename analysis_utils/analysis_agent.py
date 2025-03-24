@@ -136,10 +136,9 @@ class AnalysisAgent:
                         for i in swings:
                             if candle_high > i:
                                 removed = True
-                                swings.remove(i)
-                            
+                                swings.remove(i)    
             else:
-                for i in range(2, len(data)-2):
+                for i in range(1, len(data)-1):
                     candle_high = data[i]['high']
                     previous_high = data[i-1]['high']
                     next_high = data[i+1]['high']
@@ -174,7 +173,7 @@ class AnalysisAgent:
                                 removed = True
                                 swings.remove(i)
             else:
-                for i in range(2, len(data)-2):
+                for i in range(1, len(data)-1):
                     candle_low = data[i]['low']
                     previous_low = data[i-1]['low']
                     next_low = data[i+1]['low']
@@ -193,7 +192,7 @@ class AnalysisAgent:
         else:
             raise Exception('side should be either up or down')
     
-        return list(set(swings)), get_closest(swings)
+        return list(sorted(set(swings))), get_closest(swings)
     
     def if_level_purged_by_candle(self, candle_high, candle_low, level):
         if candle_high >= level and candle_low <= level:

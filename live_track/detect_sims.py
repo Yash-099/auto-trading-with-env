@@ -52,10 +52,10 @@ def detect_shift(level, direction, instrument, exchange, logger, futures=False, 
             try:
                 data = data_agent.get_ohlc_data(instrument, Interval.in_5_minute, 100, exchange=exchange, futures=futures)
                 if direction == 'up':
-                    _, closest = analysis_agent.get_swings(data, 'up', strong=False)
-                    logger.info(f'{instrument} closest swing high- {closest}')
+                    swings, _ = analysis_agent.get_swings(data, 'up', strong=False)
+                    logger.info(f'{instrument} closest swing high- {swings[0]}')
                     # market shifted and alert sent
-                    if data[-1]['high'] > closest:
+                    if data[-1]['high'] > swings[0]:
                         logger.info(f'{instrument} shifted in the up side')
                         alert(datetime.now(), instrument, level, direction)
                         break
@@ -65,10 +65,10 @@ def detect_shift(level, direction, instrument, exchange, logger, futures=False, 
                             logger.info('level breached going back to tracking')
                             break
                 elif direction == 'down':
-                    _, closest = analysis_agent.get_swings(data, 'down', strong=False)
-                    logger.info(f'{instrument} closest swing low- {closest}')
+                    swings, _ = analysis_agent.get_swings(data, 'down', strong=False)
+                    logger.info(f'{instrument} closest swing low- {swings[-1]}')
                     # market shifted and alert sent
-                    if data[-1]['low'] < closest:
+                    if data[-1]['low'] < swings[-1]:
                         logger.info(f'{instrument} shifted in the down side')
                         alert(datetime.now(), instrument, level, direction)
                         break
@@ -78,16 +78,16 @@ def detect_shift(level, direction, instrument, exchange, logger, futures=False, 
                             logger.info('level breached going back to tracking')
                             break
                 elif direction == 'both':
-                    _, closest_high = analysis_agent.get_swings(data, 'up', strong=False)
-                    _, closest_low = analysis_agent.get_swings(data, 'down', strong=False)
-                    logger.info(f'{instrument} closest swing high- {closest_high}')
-                    logger.info(f'{instrument} closest swing low- {closest_low}')
+                    swings_high, _ = analysis_agent.get_swings(data, 'up', strong=False)
+                    swings_low, _ = analysis_agent.get_swings(data, 'down', strong=False)
+                    logger.info(f'{instrument} closest swing high- {swings_high[0]}')
+                    logger.info(f'{instrument} closest swing low- {swings_low[-1]}')
                     # market shifted and alert sent
-                    if data[-1]['high'] > closest_high:
+                    if data[-1]['high'] > swings_high[0]:
                         logger.info(f'{instrument} shifted in the up side')
                         alert(datetime.now(), instrument, level, 'up')
                         break
-                    if data[-1]['low'] < closest_low:
+                    if data[-1]['low'] < swings_low[-1]:
                         logger.info(f'{instrument} shifted in the down side')
                         alert(datetime.now(), instrument, level, 'down')
                         break
