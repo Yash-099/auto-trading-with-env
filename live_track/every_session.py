@@ -93,30 +93,28 @@ if __name__ == '__main__':
                         data = data_agent.get_ohlc_data(instrument, Interval.in_5_minute, 2, exchange)
                         print(data)
                         candle_data = data[0]
-                        if candle_data["close"] - candle_data["open"] > 0 and candle_data['close']>session_high: # green highest candle
-                            session_high = candle_data["close"]
+                        if candle_data["close"] - candle_data["open"] > 0 and candle_data['high']>session_high: # green highest candle
+                            session_high = candle_data["high"]
                             highest_candle_data = candle_data
                             breached_downside = False
-                        elif candle_data["close"] - candle_data["open"] < 0 and candle_data['close']<session_low: # red lowest candle
-                            session_low = candle_data["close"]
+                        elif candle_data["close"] - candle_data["open"] < 0 and candle_data['low']<session_low: # red lowest candle
+                            session_low = candle_data["low"]
                             lowest_candle_data = candle_data
                             breached_upside = False
 
                         if session_high - session_low > 0: # meaning both are set
                             if candle_data["close"] > lowest_candle_data["high"] and not breached_upside:
-                                show_notification(f'Upside', '', logger)
                                 candle_close = candle_data["close"]
                                 sl = lowest_candle_data["low"]
                                 tp = candle_close + (candle_close - sl)
-                                show_notification(f'BUY','PRICE: {candle_close}\nSL: {sl}\nTP: {tp}', logger)
+                                show_notification(f'BUY',f'PRICE: {candle_close}\nSL: {sl}\nTP: {tp}', logger)
                                 breached_upside = True
                                 set_market_condition(f"buy @ {candle_close}")
                             if candle_data["close"] < highest_candle_data["low"] and not breached_downside:
-                                show_notification(f'Downside', '', logger)
                                 candle_close = candle_data["close"]
                                 sl = highest_candle_data["high"]
                                 tp = candle_close - (sl - candle_close)
-                                show_notification(f'SELL','PRICE: {candle_close}\nSL: {sl}\nTP: {tp}', logger)
+                                show_notification(f'SELL',f'PRICE: {candle_close}\nSL: {sl}\nTP: {tp}', logger)
                                 breached_downside = True
                                 set_market_condition(f"sell @ {candle_close}")
 
