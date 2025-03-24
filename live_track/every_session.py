@@ -107,14 +107,14 @@ if __name__ == '__main__':
                                 candle_close = candle_data["close"]
                                 sl = lowest_candle_data["low"]
                                 tp = candle_close + (candle_close - sl)
-                                show_notification(f'BUY',f'PRICE: {candle_close}\nSL: {sl}\nTP: {tp}', logger)
+                                show_notification(f'BUY',f'BUY\nPRICE: {candle_close}\nSL: {sl}\nTP: {tp}', logger)
                                 breached_upside = True
                                 set_market_condition(f"buy @ {candle_close}")
                             if candle_data["close"] < highest_candle_data["low"] and not breached_downside:
                                 candle_close = candle_data["close"]
                                 sl = highest_candle_data["high"]
                                 tp = candle_close - (sl - candle_close)
-                                show_notification(f'SELL',f'PRICE: {candle_close}\nSL: {sl}\nTP: {tp}', logger)
+                                show_notification(f'SELL',f'SELL\nPRICE: {candle_close}\nSL: {sl}\nTP: {tp}', logger)
                                 breached_downside = True
                                 set_market_condition(f"sell @ {candle_close}")
 
