@@ -3,7 +3,7 @@ from trade_utils import *
 from tvDatafeed import Interval
 from config import *
 import time
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 import os
 from pathlib import Path
 from argparse import ArgumentParser
@@ -12,6 +12,14 @@ import pandas as pd
 import logging
 def show_notification(title, message):
     send_notification.notify(title, message, logger)
+
+def get_time_now():
+    # add a shift of n hours and p minutes to the current time
+    return (datetime.now()+timedelta(hours=5, minutes=30)).time()
+
+def get_date_now():
+    return (datetime.now()+timedelta(hours=5, minutes=30)).date()
+
 
 def alert(time, instrument, level, direction):
     message = 'NONE'
@@ -128,7 +136,8 @@ if __name__ == '__main__':
     futures = instrument_config[instrument]['futures']
 
     while True:
-        if stop_tracking(args.instrument, instrument_config, datetime.now().time(), datetime.now().strftime("%A")):
+
+        if stop_tracking(args.instrument, instrument_config, get_time_now(), get_date_now().strftime("%A")):
             print(f'{instrument} is not trading today')
             continue
 
