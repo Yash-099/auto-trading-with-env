@@ -33,6 +33,7 @@ def monitor_and_exit():
             # Find NIFTY position
             nifty_position = None
             for position in positions['data']['net']:
+                nifty_position = ['']
                 if 'NIFTY' in position['tradingsymbol']:
                     nifty_position = position
                     break
@@ -43,26 +44,25 @@ def monitor_and_exit():
                 break
 
             # Fetch NIFTY Spot Price using OHLC data
-            data = data_agent.get_ohlc_data('NIFTY', Interval.in_5_minute, 1, exchange='NSE')
+            data = data_agent.get_ohlc_data('NIFTY', Interval.in_1_minute, 1, exchange='NSE')
             nifty_spot = data[-1]['close']  # Get latest close price
             print(f"Current NIFTY Spot Price: {nifty_spot}")
 
             # Stop-Loss Condition
-            if nifty_spot <= BELOW:
-                print("NIFTY hit SL level, exiting position...")
+            if data[-1]['low'] <= BELOW:
+                print("NIFTY below level hit, exiting position...")
                 exit_position(KITE_ENCTOKEN, nifty_position['tradingsymbol'], 
                             exchange=nifty_position['exchange'],
                             quantity=QUANTITY)
-                print("NIFTY below level hit, exiting position...")
+                
                 break  # Exit the loop after placing the order
 
             # Target Condition
-            if nifty_spot >= ABOVE:
-                print("NIFTY hit Target level, exiting position...")
+            if data[-1]['high'] >= ABOVE:
+                print("NIFTY above level hit, exiting position...")
                 exit_position(KITE_ENCTOKEN, nifty_position['tradingsymbol'],
                             exchange=nifty_position['exchange'], 
                             quantity=QUANTITY)
-                print("NIFTY above level hit, exiting position...")
                 break  # Exit the loop after placing the order
 
             time.sleep(2)  # Check every minute since we're using 5m data

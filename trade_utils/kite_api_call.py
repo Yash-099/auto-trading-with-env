@@ -37,17 +37,27 @@ def exit_position(enctoken, tradingsymbol, exchange="NFO", quantity=50):
         quantity (int): Quantity to exit (default: 50)
     """
     headers = {
-        "Authorization": f"enctoken {enctoken}"
+        "Authorization": f"enctoken {enctoken}",
+        "accept": "application/json, text/plain, */*",
+        "content-type": "application/x-www-form-urlencoded",
+        "x-kite-version": "3.0.0"
     }
 
     order_data = {
+        "variety": "regular",
         "tradingsymbol": tradingsymbol,
         "exchange": exchange,
-        "transaction_type": "BUY", # becasue we do option selling
+        "transaction_type": "BUY", # because we do option selling
         "order_type": "MARKET",
         "quantity": quantity,
-        "product": "NRML",
-        "validity": "DAY"
+        "price": 0,
+        "product": "NRML", 
+        "validity": "DAY",
+        "disclosed_quantity": 0,
+        "trigger_price": 0,
+        "squareoff": 0,
+        "stoploss": 0,
+        "trailing_stoploss": 0
     }
 
     response = requests.post(ORDER_URL, headers=headers, data=order_data)
