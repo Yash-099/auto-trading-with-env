@@ -16,12 +16,16 @@ def show_notification(title, message, logger):
     print('calling send notification')
     send_notification.notify(title, message, logger)
 
-def get_time_now():
-    # add a shift of n hours and p minutes to the current time
-    return (datetime.now()+timedelta(hours=5, minutes=30)).time()
+def get_time_now(remote=False):
+    # add a shift of n hours and p minutes to the current time if remote
+    if remote:
+        return (datetime.now()+timedelta(hours=5, minutes=30)).time()
+    return datetime.now().time()
 
-def get_date_now():
-    return (datetime.now()+timedelta(hours=5, minutes=30)).date()
+def get_date_now(remote=False):
+    if remote:
+        return (datetime.now()+timedelta(hours=5, minutes=30)).date()
+    return datetime.now().date()
 
 def set_market_condition(condition):
     print(f"Setting market condition: {condition}")
@@ -39,6 +43,7 @@ if __name__ == '__main__':
     parser.add_argument("--instrument", dest='instrument', help="instrument to track, supported USOIL and NIFTY")
     parser.add_argument("--upper", nargs='+', type=float, help="Upper levels to monitor")
     parser.add_argument("--lower", nargs='+', type=float, help="Lower levels to monitor")
+    parser.add_argument("--remote", action="store_true", help="Whether running in remote mode")
     args = parser.parse_args()
     data_agent = DataAgent()
     instrument_config = {
@@ -52,13 +57,14 @@ if __name__ == '__main__':
     }
     instrument = args.instrument
     exchange = instrument_config[instrument]['exchange']
+    remote = args.remote
 
     day = datetime.now().strftime("%A")
     
     def market_closed():
         if day in ['Saturday', 'Sunday']:
             return True
-        if get_time_now().hour < 9 or get_time_now().hour > 15:
+        if get_time_now(remote).hour < 9 or get_time_now(remote).hour > 15:
             return True
         return False
     
@@ -75,11 +81,11 @@ if __name__ == '__main__':
             lowest_candle_data = {}
             session_high = 0
             session_low = 1000000000000000
-            time_now = get_time_now()
-            session_start = datetime.combine(get_date_now(), instrument_config[instrument]['session_times'][i])
+            time_now = get_time_now(remote)
+            session_start = datetime.combine(get_date_now(remote), instrument_config[instrument]['session_times'][i])
             session_start_plus_5 = session_start + timedelta(minutes=5)
             session_start_plus_50 = session_start + timedelta(minutes=50)
-            current_time = datetime.combine(get_date_now(), time_now)
+            current_time = datetime.combine(get_date_now(remote), time_now)
             breached_downside = False
             breached_upside = False
             print(current_time)
@@ -88,7 +94,7 @@ if __name__ == '__main__':
                 print('tracking')
                 try:
                     while True:
-                        time_now = get_time_now()
+                        time_now = get_time_now(remote)
                         # this is in while loop because we want to keep checking the levels in real time
                         data = data_agent.get_ohlc_data(instrument, Interval.in_5_minute, 2, exchange)
                         print(data)
@@ -118,7 +124,7 @@ if __name__ == '__main__':
                                 breached_downside = True
                                 set_market_condition(f"sell @ {candle_close}")
 
-                        current_time = datetime.combine(get_date_now(), time_now)
+                        current_time = datetime.combine(get_date_now(remote), time_now)
                         if current_time > session_start_plus_50:
                             break # break the session loop after 50 mins
                         time.sleep(300)

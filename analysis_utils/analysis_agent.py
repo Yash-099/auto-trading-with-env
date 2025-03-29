@@ -113,7 +113,10 @@ class AnalysisAgent:
             current_price = data[-1]['close']
             closest_so_far = float('inf')
             if swings == []:
-                return 0
+                if side == 'up':
+                    return float('inf')
+                else:
+                    return float('-inf')
             for i in swings:
                 if abs(current_price - i) < closest_so_far:
                     closest_price = i
