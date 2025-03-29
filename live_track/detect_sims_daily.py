@@ -11,9 +11,6 @@ from tqdm import tqdm
 import pandas as pd
 import logging
 
-def alert(stock, direction):
-    message = f'{stock}: broke the market structure in the {direction} side'
-    # print(message)
 
 
 
@@ -26,22 +23,20 @@ def detect_shift(direction, logger):
         for stock_list_name, stock_list in stocks.items():
             for stock in tqdm(stock_list):
                 try:
-                    data = data_agent.get_ohlc_data(stock, Interval.in_daily, 100, exchange='NSE')
+                    data = data_agent.get_ohlc_data(stock, Interval.in_daily, 30, exchange='NSE')
                     if direction == 'up':
-                        _, closest = analysis_agent.get_swings(data, 'up')
+                        swings, _ = analysis_agent.get_swings(data, 'up')
                         # market shifted and alert sent
-                        if data[-1]['high'] > closest:
+                        if len(swings) > 0 and data[-1]['high'] > swings[0]:
                             logger.info(f'{stock} shifted in the up side')
-                            alert(stock, direction)
                             filtered_stocks[stock_list_name].append(stock)
                         
                     elif direction == 'down':
-                        _, closest = analysis_agent.get_swings(data, 'down')
-                        logger.info(f'{stock} closest swing low- {closest}')
+                        swings, _ = analysis_agent.get_swings(data, 'down')
+                        logger.info(f'{stock} closest swing low- {swings[-1]}')
                         # market shifted and alert sent
-                        if data[-1]['low'] < closest:
+                        if len(swings) > 0 and data[-1]['low'] < swings[-1]:
                             logger.info(f'{stock} shifted in the down side')
-                            alert(stock, direction)
                             filtered_stocks[stock_list_name].append(stock)
 
                     else:
@@ -51,6 +46,7 @@ def detect_shift(direction, logger):
                 except Exception as e:
                     logger.error(e)
                     print('error:', e)
+            print(f'{stock_list_name} filtered stocks:', filtered_stocks[stock_list_name])
         print('filtered stocks:', filtered_stocks)
     except KeyboardInterrupt:
         print('stopping')

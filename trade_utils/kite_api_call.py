@@ -2,7 +2,7 @@ import requests
 
 # 🔹 Zerodha API Endpoints
 POSITIONS_URL = "https://kite.zerodha.com/oms/portfolio/positions"
-ORDER_URL = "https://kite.zerodha.com/oms/orders"
+ORDER_URL = "https://kite.zerodha.com/oms/orders/regular"
 ALERT_URL = "https://kite.zerodha.com/oms/alerts"
 
 def fetch_positions(enctoken):

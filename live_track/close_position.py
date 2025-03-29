@@ -33,8 +33,7 @@ def monitor_and_exit():
             # Find NIFTY position
             nifty_position = None
             for position in positions['data']['net']:
-                nifty_position = ['']
-                if 'NIFTY' in position['tradingsymbol']:
+                if 'NIFTY' in position['tradingsymbol'] and ('PE' in position['tradingsymbol'] or 'CE' in position['tradingsymbol']) and position['quantity'] != 0: # searching for NIFTY options trade
                     nifty_position = position
                     break
             print("Nifty Position: ", nifty_position)

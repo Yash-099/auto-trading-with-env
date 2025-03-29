@@ -8,7 +8,7 @@ def remove_stocks_from_list(list, stocks_to_remove):
 dhan_client_id = "1100912843"
 dhan_access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkaGFuIiwicGFydG5lcklkIjoiIiwiZXhwIjoxNzE0MjEzMzAxLCJ0b2tlbkNvbnN1bWVyVHlwZSI6IlNFTEYiLCJ3ZWJob29rVXJsIjoiIiwiZGhhbkNsaWVudElkIjoiMTEwMDkxMjg0MyJ9.NCBXmMX0d5Nx-f-dOyR0rL3K_tz5gQJsrLegaq-xCEt3D5b_Bq2G2YoWRmT6rOJzbjcjyeDVzlLi-fnujoQ7rA"
 exchange = 'NSE'
-KITE_ENCTOKEN = "9aQKk9tGaco+G/TD9nsKL4yLrkEd8pJ9+siJVE3+bfjMLL+hHpexkuzSPSTkjvMs9kUe8X6YMkUp+j7OR96oY/sA1jNjdkKZKWkjmdzYIRIGSdbLxSxEnw=="
+KITE_ENCTOKEN = "QSyaBxD0zbuXsDd4K9lbO1tbzEUIoKt2Vh2fwebW72XHc6uEwVQR3+hMgVxSujYYGzuAaqSXmRXD9z0tkwTbVs320Rk5j0TN0gm5akUk8r1kAXLRxC2JVQ=="
 QUANTITY = 75
 nifty_50_stocks = ["HDFCBANK",
 "RELIANCE",
