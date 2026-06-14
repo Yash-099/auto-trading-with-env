@@ -10,65 +10,70 @@ dhan_access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkaGFuIiwicG
 exchange = 'NSE'
 KITE_ENCTOKEN = "QSyaBxD0zbuXsDd4K9lbO1tbzEUIoKt2Vh2fwebW72XHc6uEwVQR3+hMgVxSujYYGzuAaqSXmRXD9z0tkwTbVs320Rk5j0TN0gm5akUk8r1kAXLRxC2JVQ=="
 QUANTITY = 75
-nifty_50_stocks = ["SHRIRAMFIN"
-"BAJFINANCE"
-"JSWSTEEL"
-"AXISBANK"
-"MARUTI"
-"INDUSINDBK"
-"HEROMOTOCO"
-"BAJAJFINSV"
-"DRREDDY"
-"M&M"
-"ETERNAL"
-"TATASTEEL"
-"HINDALCO"
-"TRENT"
-"EICHERMOT"
-"TITAN"
-"KOTAKBANK"
-"HDFCBANK"
-"ADANIENT"
-"NTPC"
-"BAJAJ-AUTO"
-"COALINDIA"
-"ONGC"
-"CIPLA"
-"APOLLOHOSP"
-"JIOFIN"
-"INFY"
-"ADANIPORTS"
-"SBIN"
-"ULTRACEMCO"
-"TECHM"
-"GRASIM"
-"HINDUNILVR"
-"TCS"
-"NESTLEIND"
-"ITC"
-"POWERGRID"
-"ICICIBANK"
-"HCLTECH"
-"LT"
-"TATACONSUM"
-"WIPRO"
-"TATAMOTORS"
-"SBILIFE"
-"ASIANPAINT"
-"RELIANCE"
-"SUNPHARMA"
-"BHARTIARTL"
-"BEL"
-"HDFCLIFE"]
+nifty_50_stocks = [
+    "SHRIRAMFIN",
+    "BAJFINANCE",
+    "JSWSTEEL",
+    "AXISBANK",
+    "MARUTI",
+    "INDUSINDBK",
+    "HEROMOTOCO",
+    "BAJAJFINSV",
+    "DRREDDY",
+    "M&M",
+    "ETERNAL",
+    "TATASTEEL",
+    "HINDALCO",
+    "TRENT",
+    "EICHERMOT",
+    "TITAN",
+    "KOTAKBANK",
+    "HDFCBANK",
+    "ADANIENT",
+    "NTPC",
+    "BAJAJ-AUTO",
+    "COALINDIA",
+    "ONGC",
+    "CIPLA",
+    "APOLLOHOSP",
+    "JIOFIN",
+    "INFY",
+    "ADANIPORTS",
+    "SBIN",
+    "ULTRACEMCO",
+    "TECHM",
+    "GRASIM",
+    "HINDUNILVR",
+    "TCS",
+    "NESTLEIND",
+    "ITC",
+    "POWERGRID",
+    "ICICIBANK",
+    "HCLTECH",
+    "LT",
+    "TATACONSUM",
+    "WIPRO",
+    "TATAMOTORS",
+    "SBILIFE",
+    "ASIANPAINT",
+    "RELIANCE",
+    "SUNPHARMA",
+    "BHARTIARTL",
+    "BEL",
+    "HDFCLIFE",
+]
 
 stocks_to_track = remove_stocks_from_list(nifty_50_stocks, ['MARUTI'])
 
+mid_cap_stocks = []
+small_cap_stocks = []
+old_nifty50 = []
 
 all_stocks = {
-    'nifty50' : nifty_50_stocks,
-    'midcap' : mid_cap_stocks,
-    'smallcap' : small_cap_stocks,
-    'oldnifty50': old_nifty50
+    'nifty50': nifty_50_stocks,
+    'midcap': mid_cap_stocks,
+    'smallcap': small_cap_stocks,
+    'oldnifty50': old_nifty50,
 }
 
 BE = [

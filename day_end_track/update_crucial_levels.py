@@ -1,7 +1,8 @@
 from utils.analysis_utils import *
 from tvDatafeed import Interval
-from config import *
+from data.config import *
 from tqdm import tqdm
+import json
 import time
 fvgs = FVGS()
 obs = OBS()
@@ -142,7 +143,7 @@ def get_weekly_levels(stock):
     )
 
 def get_monthly_levels(stock):
-    candles = max_number_of_candles(stock, Interval.in_monthly, 500)
+    candles = max_number_of_candles(stock, Interval.in_monthly, 200)
     return get_filtered_bisis(stock, candles, 1, Interval.in_monthly) + get_filtered_orderblocks(stock, candles, 1, Interval.in_monthly)
 
 def get_daily_levels(stock):
