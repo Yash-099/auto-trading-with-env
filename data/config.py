@@ -63,7 +63,6 @@ nifty_50_stocks = [
     "HDFCLIFE",
 ]
 
-stocks_to_track = remove_stocks_from_list(nifty_50_stocks, ['MARUTI'])
 
 mid_cap_stocks = []
 small_cap_stocks = []
@@ -2369,3 +2368,4 @@ EQ = [
         "NKIND",
         "MODTHREAD"
 ]
+stocks_to_track = remove_stocks_from_list(nifty_50_stocks + mid_cap_stocks + small_cap_stocks, ['MARUTI'])
