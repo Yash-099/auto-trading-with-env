@@ -1,6 +1,0 @@
-Stock RELIANCE is near its liquidity pool at price 2825.8 current price is 2940.25
-Stock INFY is near its liquidity pool at price 1351.65 current price is 1411.25
-Stock SBIN is near its liquidity pool at price 719.79999 current price is 750.45001
-Stock ASIANPAINT is near its liquidity pool at price 2708.6499 current price is 2808.55
-Stock INDUSINDBK is near its liquidity pool at price 1422.7 current price is 1482.05
-Stock NESTLEIND is near its liquidity pool at price 2409.1001 current price is 2437.7

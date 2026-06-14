@@ -1,6 +1,6 @@
-from analysis_utils import *
+from utils.analysis_utils import *
 from tvDatafeed import Interval
-from config import *
+from data.config import *
 from datetime import date
 from pathlib import Path
 
@@ -10,7 +10,7 @@ class OBS:
         try:
             data = data_agent.get_ohlc_data(stock, time_frame, candles)
         except Exception as e:
-            if "'NoneType' object has no attribute 'iloc'" in str(e):
+            if isinstance(e, IndexError):
                 print(f'not sufficient data dropping {stock}')
                 return []
             time.sleep(5)

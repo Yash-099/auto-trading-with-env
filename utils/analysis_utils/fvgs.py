@@ -1,6 +1,6 @@
-from analysis_utils import *
+from utils.analysis_utils import *
 from tvDatafeed import Interval
-from config import *
+from data.config import *
 import time
 from datetime import date
 import os
@@ -25,7 +25,7 @@ class FVGS:
         try:
             data = data_agent.get_ohlc_data(stock, time_frame, candles)
         except Exception as e:
-            if "'NoneType' object has no attribute 'iloc'" in str(e):
+            if isinstance(e, IndexError):
                 print(f'not sufficient data dropping {stock}')
                 return []
             print(e) 

@@ -213,7 +213,7 @@ class AnalysisAgent:
             purged = False
             for candle in data:
                 if candle['datetime'] > i['datetime']:
-                    if candle['low'] < i['close']:
+                    if candle['close'] < i['close']:
                         purged = True
                         break
             if not purged:
